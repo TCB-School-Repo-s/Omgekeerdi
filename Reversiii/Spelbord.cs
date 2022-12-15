@@ -12,15 +12,15 @@ namespace Reversiii
     {
 
         int n;
-        Color PlayerOneColor;
-        Color PlayerTwoColor;
+        Color ColorOne;
+        Color ColorTwo;
         int[,] boardArray;
 
         public Spelbord()
         {
             this.n = 6;
-            this.PlayerOneColor = Color.Black;
-            this.PlayerTwoColor = Color.White;
+            this.ColorOne = Color.Black;
+            this.ColorTwo = Color.White;
             this.boardArray = new int[n, n];
             this.Paint += DrawBoard;
             this.MouseClick += MuisClick;
@@ -42,6 +42,36 @@ namespace Reversiii
                 boardArray = new int[n, n];
                 this.Invalidate();
                 InitializeBoard();
+            }
+        }
+
+        [Category("Game Settings"),
+         Description("Changes stone color of player one")]
+        public Color PlayerOneColor
+        {
+            get
+            {
+                return ColorOne;
+            }
+            set
+            {
+                ColorOne = value;
+                this.Invalidate();
+            }
+        }
+
+        [Category("Game Settings"),
+         Description("Changes stone color of player two")]
+        public Color PlayerTwoColor
+        {
+            get
+            {
+                return ColorTwo;
+            }
+            set
+            {
+                ColorTwo = value;
+                this.Invalidate();
             }
         }
 
@@ -101,11 +131,11 @@ namespace Reversiii
                 {
                     if (boardArray[i, j] == 1)
                     {
-                        e.Graphics.FillEllipse(Brushes.Black, i * x + 5, j * y + 5, x - 10, y - 10);
+                        e.Graphics.FillEllipse(new SolidBrush(ColorOne), i * x + 5, j * y + 5, x - 10, y - 10);
                     }
                     else if (boardArray[i, j] == 2)
                     {
-                        e.Graphics.FillEllipse(Brushes.White, i * x + 5, j * y + 5, x - 10, y - 10);
+                        e.Graphics.FillEllipse(new SolidBrush(ColorTwo), i * x + 5, j * y + 5, x - 10, y - 10);
                     }
                 }
             }

@@ -86,6 +86,8 @@
             this.spelbord1.BackColor = System.Drawing.Color.SteelBlue;
             this.spelbord1.Location = new System.Drawing.Point(12, 14);
             this.spelbord1.Name = "spelbord1";
+            this.spelbord1.PlayerOneColor = System.Drawing.Color.Black;
+            this.spelbord1.PlayerTwoColor = System.Drawing.Color.White;
             this.spelbord1.Size = new System.Drawing.Size(500, 500);
             this.spelbord1.TabIndex = 3;
             // 
