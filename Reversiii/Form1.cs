@@ -34,5 +34,11 @@ namespace Reversiii
             spelbord1.BoardSize = n;
             spelbord1.resetGame();
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm form = new AboutForm();
+            form.Show();
+        }
     }
 }

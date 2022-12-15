@@ -123,8 +123,9 @@ namespace Reversiii
             Spelbord? board = (Spelbord?)sender;
 
             // Draw 6 x 6 grid using panel1 size
-            float x = board.Width / n;
-            float y = board.Height / n;
+            float x = board.Width / (float)n;
+            float y = board.Height / (float)n;
+            Debug.WriteLine($"X: {x} en Y: {y}");
             Pen pen = new Pen(Color.Black, 2.5f);
             for (int i = 0; i < n; i++)
             {

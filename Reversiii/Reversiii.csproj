@@ -6,6 +6,10 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Title>Omgekeerdi</Title>
+    <Company>Bas van 't Hazeveld &amp; Dana Stelling</Company>
+    <Copyright>© 2022 Bas van 't Hazeveld &amp; Dana Stelling</Copyright>
+    <Product>Omgekeerdi</Product>
   </PropertyGroup>
 
   <ItemGroup>
