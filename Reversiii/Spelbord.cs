@@ -15,17 +15,16 @@ namespace Reversiii
         Color PlayerTwoColor;
         int[,] boardArray;
 
-        public Spelbord(int size, Color PlayerOneColor, Color PlayerTwoColor)
+        public Spelbord()
         {
-            this.n = size;
-            this.PlayerOneColor = PlayerOneColor;
-            this.PlayerTwoColor = PlayerTwoColor;
-            this.boardArray = new int[size, size];
+            this.n = 6;
+            this.PlayerOneColor = Color.Black;
+            this.PlayerTwoColor = Color.White;
+            this.boardArray = new int[n, n];
             this.Paint += DrawBoard;
             this.MouseClick += MuisClick;
             InitializeBoard();
         }
-
 
         public void InitializeBoard()
         {
