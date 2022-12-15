@@ -29,22 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.board = new Spelbord(8, Color.Black, Color.White);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel1.Location = new System.Drawing.Point(13, 19);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(500, 500);
-            this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // groupBox1
             // 
@@ -75,6 +66,14 @@
             this.button1.Text = "Nieuw spel";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // board
+            // 
+            this.board.BackColor = System.Drawing.Color.SteelBlue;
+            this.board.Location = new System.Drawing.Point(10, 19);
+            this.board.Name = "board";
+            this.board.Size = new System.Drawing.Size(500, 500);
+            this.board.TabIndex = 3;
+            // 
             // groupBox2
             // 
             this.groupBox2.Location = new System.Drawing.Point(527, 314);
@@ -91,7 +90,7 @@
             this.ClientSize = new System.Drawing.Size(897, 534);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.board);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Omgekeerdi";
@@ -101,9 +100,8 @@
         }
 
         #endregion
-
-        private Panel panel1;
         private GroupBox groupBox1;
+        private Spelbord board;
         private Button button1;
         private Button button2;
         private GroupBox groupBox2;
