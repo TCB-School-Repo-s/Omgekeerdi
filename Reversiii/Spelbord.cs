@@ -26,6 +26,7 @@ namespace Reversiii
             InitializeBoard();
         }
 
+
         public void InitializeBoard()
         {
             for (int i = 0; i < n; i++)
@@ -50,6 +51,10 @@ namespace Reversiii
             Debug.WriteLine($"X: {x} en Y: {y}");
             int playingPlayer = 1;
             int opponent = 2;
+
+            boardArray[x, y] = playingPlayer;
+            this.Invalidate();
+
             //checkIfEncloses(x, y, playingPlayer, opponent);
         }
 

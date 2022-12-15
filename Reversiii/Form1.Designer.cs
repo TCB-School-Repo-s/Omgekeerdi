@@ -33,7 +33,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.board = new Spelbord(8, Color.Black, Color.White);
+            this.board = new Spelbord(12, Color.Black, Color.White);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
