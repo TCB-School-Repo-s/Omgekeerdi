@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -26,11 +27,29 @@ namespace Reversiii
             InitializeBoard();
         }
 
+        [DefaultValue(6),
+         Category("Game Settings"),
+         Description("The size of the board")]
+        public int BoardSize
+        {
+            get
+            {
+                return n;
+            }
+            set
+            {
+                n = value;
+                boardArray = new int[n, n];
+                this.Invalidate();
+                InitializeBoard();
+            }
+        }
+
         public void InitializeBoard()
         {
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < BoardSize; i++)
             {
-                for (int j = 0; j < n; j++)
+                for (int j = 0; j < BoardSize; j++)
                 {
                     boardArray[i, j] = 0;
                 }
