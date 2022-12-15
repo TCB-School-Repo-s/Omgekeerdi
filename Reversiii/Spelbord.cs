@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace Reversiii
             this.PlayerTwoColor = PlayerTwoColor;
             this.boardArray = new int[size, size];
             this.Paint += DrawBoard;
+            this.MouseClick += MuisClick;
             InitializeBoard();
         }
 
@@ -39,14 +41,16 @@ namespace Reversiii
             boardArray[n / 2, n / 2 - 1] = 2;
         }
 
-        public bool checkIfValidSpace(int x, int y, int playingPlayer, int opponent)
+
+        public void MuisClick(object sender, MouseEventArgs e)
         {
-            // Check if space in array boardArray is valid, it is valid if and only if it encloses an opponent's space
-            // and is not already occupied by a player
-            if (boardArray[x, y] != 0)
-            {
-                return false;
-            }
+            Spelbord board = (Spelbord)sender;
+            int x = 0 + (n - 0) * e.X / board.Width;
+            int y = 0 + (n - 0) * e.Y / board.Height;
+            Debug.WriteLine($"X: {x} en Y: {y}");
+            int playingPlayer = 1;
+            int opponent = 2;
+            //checkIfEncloses(x, y, playingPlayer, opponent);
         }
 
         public void changeSelectedPlace(int x, int y, int player)
