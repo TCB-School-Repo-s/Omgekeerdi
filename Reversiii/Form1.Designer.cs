@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -39,6 +41,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Location = new System.Drawing.Point(518, 14);
@@ -50,9 +54,32 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Game instellingen";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(75, 15);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Bord Grootte";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "6x6",
+            "8x8",
+            "10x10",
+            "12x12",
+            "16x16"});
+            this.comboBox1.Location = new System.Drawing.Point(87, 21);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(220, 23);
+            this.comboBox1.TabIndex = 2;
+            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(5, 50);
+            this.button2.Location = new System.Drawing.Point(6, 182);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(303, 22);
@@ -62,13 +89,14 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(5, 23);
+            this.button1.Location = new System.Drawing.Point(6, 156);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(303, 22);
             this.button1.TabIndex = 0;
             this.button1.Text = "Nieuw spel";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox2
             // 
@@ -104,6 +132,7 @@
             this.Name = "Form1";
             this.Text = "Omgekeerdi";
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -115,5 +144,7 @@
         private Button button2;
         private GroupBox groupBox2;
         private Spelbord spelbord1;
+        private Label label1;
+        private ComboBox comboBox1;
     }
 }

@@ -10,7 +10,7 @@ namespace Reversiii
 {
     internal class Spelbord : Panel
     {
-
+        // TODO: Game logic
         int n;
         Color ColorOne;
         Color ColorTwo;
@@ -28,7 +28,7 @@ namespace Reversiii
         }
 
         [DefaultValue(6),
-         Category("Game Settings"),
+         Category("1 Game Settings"),
          Description("The size of the board")]
         public int BoardSize
         {
@@ -45,7 +45,7 @@ namespace Reversiii
             }
         }
 
-        [Category("Game Settings"),
+        [Category("1 Game Settings"),
          Description("Changes stone color of player one")]
         public Color PlayerOneColor
         {
@@ -60,7 +60,7 @@ namespace Reversiii
             }
         }
 
-        [Category("Game Settings"),
+        [Category("1 Game Settings"),
          Description("Changes stone color of player two")]
         public Color PlayerTwoColor
         {
@@ -89,6 +89,13 @@ namespace Reversiii
             boardArray[n / 2 - 1, n / 2] = 2;
             boardArray[n / 2, n / 2 - 1] = 2;
         }
+
+        public void resetGame()
+        {
+            boardArray = new int[n, n];
+            InitializeBoard();
+            this.Invalidate();
+        }
         
 
         public void MuisClick(object sender, MouseEventArgs e)
@@ -100,6 +107,8 @@ namespace Reversiii
             int playingPlayer = 1;
             int opponent = 2;
 
+            boardArray[x, y] = 1;
+            this.Invalidate();
 
             //checkIfEncloses(x, y, playingPlayer, opponent);
         }
@@ -114,8 +123,8 @@ namespace Reversiii
             Spelbord? board = (Spelbord?)sender;
 
             // Draw 6 x 6 grid using panel1 size
-            int x = board.Width / n;
-            int y = board.Height / n;
+            float x = board.Width / n;
+            float y = board.Height / n;
             Pen pen = new Pen(Color.Black, 2.5f);
             for (int i = 0; i < n; i++)
             {
