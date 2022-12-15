@@ -33,7 +33,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.board = new Spelbord(12, Color.Black, Color.White);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,14 +65,6 @@
             this.button1.Text = "Nieuw spel";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // board
-            // 
-            this.board.BackColor = System.Drawing.Color.SteelBlue;
-            this.board.Location = new System.Drawing.Point(10, 19);
-            this.board.Name = "board";
-            this.board.Size = new System.Drawing.Size(500, 500);
-            this.board.TabIndex = 3;
-            // 
             // groupBox2
             // 
             this.groupBox2.Location = new System.Drawing.Point(527, 314);
@@ -90,7 +81,6 @@
             this.ClientSize = new System.Drawing.Size(897, 534);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.board);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Omgekeerdi";

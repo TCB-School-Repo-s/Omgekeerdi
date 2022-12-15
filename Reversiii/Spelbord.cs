@@ -41,7 +41,7 @@ namespace Reversiii
             boardArray[n / 2 - 1, n / 2] = 2;
             boardArray[n / 2, n / 2 - 1] = 2;
         }
-
+        
 
         public void MuisClick(object sender, MouseEventArgs e)
         {
@@ -52,8 +52,6 @@ namespace Reversiii
             int playingPlayer = 1;
             int opponent = 2;
 
-            boardArray[x, y] = playingPlayer;
-            this.Invalidate();
 
             //checkIfEncloses(x, y, playingPlayer, opponent);
         }
