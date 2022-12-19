@@ -40,5 +40,26 @@ namespace Reversiii
             AboutForm form = new AboutForm();
             form.Show();
         }
+
+        private void playerTwoScore_Paint(object sender, PaintEventArgs e)
+        {
+            PictureBox box = (PictureBox)sender;
+            e.Graphics.FillEllipse(new SolidBrush(spelbord1.PlayerTwoColor), 0, 0, box.Width, box.Height);
+        }
+
+        private void playerOneScore_Paint(object sender, PaintEventArgs e)
+        {
+            PictureBox box = (PictureBox)sender;
+            e.Graphics.FillEllipse(new SolidBrush(spelbord1.PlayerOneColor), 0, 0, box.Width, box.Height);
+        }
+
+        private void spelbord1_Paint(object sender, PaintEventArgs e)
+        {
+            Spelbord bord = (Spelbord)sender;
+
+            playerOneLabel.Text = bord.getPlayerOneScore().ToString();
+            playerTwoLabel.Text = bord.getPlayerTwoScore().ToString();
+
+        }
     }
 }

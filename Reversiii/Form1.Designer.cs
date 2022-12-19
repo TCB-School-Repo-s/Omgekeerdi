@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -35,14 +36,30 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.playerTwoLabel = new System.Windows.Forms.Label();
+            this.playerOneLabel = new System.Windows.Forms.Label();
+            this.playerTwoScore = new System.Windows.Forms.PictureBox();
+            this.playerOneScore = new System.Windows.Forms.PictureBox();
             this.spelbord1 = new Reversiii.Spelbord();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gameRulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spelBordMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.x6ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.x8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.x10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.x10ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.x14ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.x16ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.playerTwoScore)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerOneScore)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.spelBordMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -106,6 +123,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.playerTwoLabel);
+            this.groupBox2.Controls.Add(this.playerOneLabel);
+            this.groupBox2.Controls.Add(this.playerTwoScore);
+            this.groupBox2.Controls.Add(this.playerOneScore);
             this.groupBox2.Location = new System.Drawing.Point(518, 249);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
@@ -115,15 +136,55 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Game Statistieken";
             // 
+            // playerTwoLabel
+            // 
+            this.playerTwoLabel.AutoSize = true;
+            this.playerTwoLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.playerTwoLabel.Location = new System.Drawing.Point(87, 188);
+            this.playerTwoLabel.Name = "playerTwoLabel";
+            this.playerTwoLabel.Size = new System.Drawing.Size(63, 25);
+            this.playerTwoLabel.TabIndex = 3;
+            this.playerTwoLabel.Text = "label3";
+            // 
+            // playerOneLabel
+            // 
+            this.playerOneLabel.AutoSize = true;
+            this.playerOneLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.playerOneLabel.Location = new System.Drawing.Point(87, 69);
+            this.playerOneLabel.Name = "playerOneLabel";
+            this.playerOneLabel.Size = new System.Drawing.Size(63, 25);
+            this.playerOneLabel.TabIndex = 2;
+            this.playerOneLabel.Text = "label2";
+            // 
+            // playerTwoScore
+            // 
+            this.playerTwoScore.Location = new System.Drawing.Point(6, 164);
+            this.playerTwoScore.Name = "playerTwoScore";
+            this.playerTwoScore.Size = new System.Drawing.Size(75, 77);
+            this.playerTwoScore.TabIndex = 1;
+            this.playerTwoScore.TabStop = false;
+            this.playerTwoScore.Paint += new System.Windows.Forms.PaintEventHandler(this.playerTwoScore_Paint);
+            // 
+            // playerOneScore
+            // 
+            this.playerOneScore.Location = new System.Drawing.Point(6, 49);
+            this.playerOneScore.Name = "playerOneScore";
+            this.playerOneScore.Size = new System.Drawing.Size(75, 77);
+            this.playerOneScore.TabIndex = 0;
+            this.playerOneScore.TabStop = false;
+            this.playerOneScore.Paint += new System.Windows.Forms.PaintEventHandler(this.playerOneScore_Paint);
+            // 
             // spelbord1
             // 
             this.spelbord1.BackColor = System.Drawing.Color.SteelBlue;
+            this.spelbord1.ContextMenuStrip = this.spelBordMenu;
             this.spelbord1.Location = new System.Drawing.Point(12, 27);
             this.spelbord1.Name = "spelbord1";
             this.spelbord1.PlayerOneColor = System.Drawing.Color.Black;
             this.spelbord1.PlayerTwoColor = System.Drawing.Color.White;
             this.spelbord1.Size = new System.Drawing.Size(500, 500);
             this.spelbord1.TabIndex = 3;
+            this.spelbord1.Paint += new System.Windows.Forms.PaintEventHandler(this.spelbord1_Paint);
             // 
             // menuStrip1
             // 
@@ -154,15 +215,71 @@
             // gameRulesToolStripMenuItem
             // 
             this.gameRulesToolStripMenuItem.Name = "gameRulesToolStripMenuItem";
-            this.gameRulesToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.gameRulesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.gameRulesToolStripMenuItem.Text = "Game rules";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // spelBordMenu
+            // 
+            this.spelBordMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newGameToolStripMenuItem});
+            this.spelBordMenu.Name = "spelBordMenu";
+            this.spelBordMenu.Size = new System.Drawing.Size(181, 48);
+            // 
+            // newGameToolStripMenuItem
+            // 
+            this.newGameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.x6ToolStripMenuItem,
+            this.x8ToolStripMenuItem,
+            this.x10ToolStripMenuItem,
+            this.x10ToolStripMenuItem1,
+            this.x14ToolStripMenuItem,
+            this.x16ToolStripMenuItem});
+            this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newGameToolStripMenuItem.Text = "New Game";
+            // 
+            // x6ToolStripMenuItem
+            // 
+            this.x6ToolStripMenuItem.Name = "x6ToolStripMenuItem";
+            this.x6ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.x6ToolStripMenuItem.Text = "6x6";
+            // 
+            // x8ToolStripMenuItem
+            // 
+            this.x8ToolStripMenuItem.Name = "x8ToolStripMenuItem";
+            this.x8ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.x8ToolStripMenuItem.Text = "8x8";
+            // 
+            // x10ToolStripMenuItem
+            // 
+            this.x10ToolStripMenuItem.Name = "x10ToolStripMenuItem";
+            this.x10ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.x10ToolStripMenuItem.Text = "10x10";
+            // 
+            // x10ToolStripMenuItem1
+            // 
+            this.x10ToolStripMenuItem1.Name = "x10ToolStripMenuItem1";
+            this.x10ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.x10ToolStripMenuItem1.Text = "12x10";
+            // 
+            // x14ToolStripMenuItem
+            // 
+            this.x14ToolStripMenuItem.Name = "x14ToolStripMenuItem";
+            this.x14ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.x14ToolStripMenuItem.Text = "14x14";
+            // 
+            // x16ToolStripMenuItem
+            // 
+            this.x16ToolStripMenuItem.Name = "x16ToolStripMenuItem";
+            this.x16ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.x16ToolStripMenuItem.Text = "16x16";
             // 
             // Form1
             // 
@@ -182,8 +299,13 @@
             this.Text = "Omgekeerdi";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.playerTwoScore)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerOneScore)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.spelBordMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,5 +325,17 @@
         private ToolStripMenuItem helpToolStripMenuItem;
         private ToolStripMenuItem gameRulesToolStripMenuItem;
         private ToolStripMenuItem aboutToolStripMenuItem;
+        private PictureBox playerTwoScore;
+        private PictureBox playerOneScore;
+        private Label playerTwoLabel;
+        private Label playerOneLabel;
+        private ContextMenuStrip spelBordMenu;
+        private ToolStripMenuItem newGameToolStripMenuItem;
+        private ToolStripMenuItem x6ToolStripMenuItem;
+        private ToolStripMenuItem x8ToolStripMenuItem;
+        private ToolStripMenuItem x10ToolStripMenuItem;
+        private ToolStripMenuItem x10ToolStripMenuItem1;
+        private ToolStripMenuItem x14ToolStripMenuItem;
+        private ToolStripMenuItem x16ToolStripMenuItem;
     }
 }

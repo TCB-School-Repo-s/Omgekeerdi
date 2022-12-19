@@ -14,6 +14,8 @@ namespace Reversiii
         int n;
         Color ColorOne;
         Color ColorTwo;
+        int StonesPlayerOne;
+        int StonesPlayerTwo;
         int[,] boardArray;
 
         public Spelbord()
@@ -88,6 +90,9 @@ namespace Reversiii
             boardArray[n / 2, n / 2] = 1;
             boardArray[n / 2 - 1, n / 2] = 2;
             boardArray[n / 2, n / 2 - 1] = 2;
+
+            this.StonesPlayerOne = 2;
+            this.StonesPlayerTwo = 2;
         }
 
         public void resetGame()
@@ -96,7 +101,7 @@ namespace Reversiii
             InitializeBoard();
             this.Invalidate();
         }
-        
+
 
         public void MuisClick(object sender, MouseEventArgs e)
         {
@@ -110,6 +115,8 @@ namespace Reversiii
             boardArray[x, y] = 1;
             this.Invalidate();
 
+            this.setPlayerSCore(1, 1);
+
             //checkIfEncloses(x, y, playingPlayer, opponent);
         }
 
@@ -117,7 +124,7 @@ namespace Reversiii
         {
             // TODO: Draw player on selected space
         }
-        
+
         public void DrawBoard(object? sender, PaintEventArgs e)
         {
             Spelbord? board = (Spelbord?)sender;
@@ -150,5 +157,28 @@ namespace Reversiii
                 }
             }
         }
+
+        //Quality of life functions :D
+        public int[,] getBoardPosition()
+        {
+            return boardArray;
+        }
+        
+        public int getPlayerOneScore()
+        {
+            return StonesPlayerOne;
+        }
+
+        public int getPlayerTwoScore()
+        {
+            return StonesPlayerTwo;
+        }
+
+        private void setPlayerSCore(int player, int amount)
+        {
+            if (player == 1) StonesPlayerOne += amount;
+            else StonesPlayerTwo += amount;
+        }
+
     }
 }
