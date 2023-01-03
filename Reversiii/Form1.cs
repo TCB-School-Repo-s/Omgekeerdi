@@ -7,7 +7,6 @@ namespace Reversiii
         public Form1()
         {
             InitializeComponent();
-            comboBox1.SelectedValue = "6x6";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -61,5 +60,11 @@ namespace Reversiii
             playerTwoLabel.Text = bord.getPlayerTwoScore().ToString();
 
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            comboBox1.SelectedIndex = 0;
+        }
+
     }
 }

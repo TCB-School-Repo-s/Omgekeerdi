@@ -18,6 +18,10 @@ namespace Reversiii
         int StonesPlayerTwo;
         int[,] boardArray;
 
+        int _playingPlayer = 1;
+        int _opponent = 2;
+        
+
         public Spelbord()
         {
             this.n = 6;
@@ -106,41 +110,17 @@ namespace Reversiii
             this.Invalidate();
         }
 
-        //Game logic functions
+        // Reversi game logic functions
+        
+        
 
-        //Check legality of a move
-        public bool checkIfLegal(int x, int y, int playingPlayer, int opponent)
+
+        public void SwitchPlayers(int playingPlayer, int opponent)
         {
-            bool legal = false;
-
-            //Check if the field is empty
-            if (boardArray[x, y] == 0)
-            {
-                //Check if the field is surrounded by stones of the opponent
-                if (boardArray[x + 1, y] == opponent || boardArray[x - 1, y] == opponent || boardArray[x, y + 1] == opponent || boardArray[x, y - 1] == opponent)
-                {
-                    legal = true;
-                }
-            }
-            return legal;
+            _playingPlayer = opponent;
+            _opponent = playingPlayer;
         }
-
-        //Check if a move encloses any stones
-        public void checkIfEncloses(int x, int y, int playingPlayer, int opponent)
-        {
-            //Check if the field is surrounded by stones of the opponent
-            if (boardArray[x + 1, y] == opponent || boardArray[x - 1, y] == opponent || boardArray[x, y + 1] == opponent || boardArray[x, y - 1] == opponent)
-            {
-                //Check if the field is surrounded by stones of the player
-                if (boardArray[x + 1, y] == playingPlayer || boardArray[x - 1, y] == playingPlayer || boardArray[x, y + 1] == playingPlayer || boardArray[x, y - 1] == playingPlayer)
-                {
-                    //Enclose all stones of the opponent
-                    //encloseStones(x, y, playingPlayer, opponent);
-                }
-                
-            }
-        }
-
+        
 
         public void MuisClick(object sender, MouseEventArgs e)
         {
@@ -154,23 +134,10 @@ namespace Reversiii
             // Print the coordinates to the console
             Debug.WriteLine($"X: {x} en Y: {y}");
 
-            // Get the playing player
-            int playingPlayer = 1;
-            int opponent = 2;
-
-            if(checkIfLegal(x, y, playingPlayer, opponent))
-            {
-                boardArray[x, y] = 1;
-            }
+            //makeMove(x, y, _playingPlayer, _opponent);
 
             this.Invalidate();
-
-            // Check if the move encloses any stones
-            //checkIfEncloses(x, y, playingPlayer, opponent);
         }
-
-        
-
 
         public void changeSelectedPlace(int x, int y, int player)
         {
@@ -211,22 +178,22 @@ namespace Reversiii
         }
 
         //Quality of life functions :D
-        public int[,] getBoardPosition()
+        public int[,] getBoardPosition() // gets a board position's player stone value
         {
             return boardArray;
         }
         
-        public int getPlayerOneScore()
+        public int getPlayerOneScore() //returns amount of Player One stones
         {
             return StonesPlayerOne;
         }
 
-        public int getPlayerTwoScore()
+        public int getPlayerTwoScore() // returns amount of player two stones
         {
             return StonesPlayerTwo;
         }
 
-        private void setPlayerSCore(int player, int amount)
+        private void setPlayerScore(int player, int amount) // sets player scores
         {
             if (player == 1) StonesPlayerOne += amount;
             else StonesPlayerTwo += amount;

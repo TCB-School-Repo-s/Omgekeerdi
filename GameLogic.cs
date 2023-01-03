@@ -2,11 +2,12 @@
 
 public class Gamelogic
 {
-    int[,] boardArray;
+    int[6, 6] boardArray = new int[6,6];
 
-	public Gamelogic(int[,] boardArray)
+    public Gamelogic(int[,] boardArray)
 	{
-        this.boardArray = boardArray;
+        boardArray[2, 2] = 1;
+
 	}
 
     
