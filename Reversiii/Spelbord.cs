@@ -124,7 +124,7 @@ namespace Reversiii
 
         If you find the player's piece again before reaching the edge of the board, it means that the player's piece encloses the opponent's piece and the opponent's piece should be captured and turned into the player's piece.
          */
-
+        
         public bool LegalMove(int playerPlayer, int opponent, int x, int y)
         {
             bool legal = false;
@@ -185,13 +185,26 @@ namespace Reversiii
             Debug.WriteLine($"X: {x} en Y: {y}");
 
             //makeMove(x, y, _playingPlayer, _opponent);
-
+            
+            //draw stone on selected place
+            changeSelectedPlace(x,y,_playingPlayer);
+            
+            //stones counter
+            if (_playingPlayer == 1)
+            {
+                StonesPlayerOne++;
+            }
+            else { StonesPlayerTwo++;
+            }
+            
             this.Invalidate();
+            
+            SwitchPlayers(_playingPlayer,_opponent);
         }
 
         public void changeSelectedPlace(int x, int y, int player)
-        {
-            // TODO: Draw player on selected space
+        {   
+            boardArray[x, y] = player;
         }
 
         public void DrawBoard(object? sender, PaintEventArgs e)
@@ -256,11 +269,7 @@ namespace Reversiii
             return StonesPlayerTwo;
         }
 
-        private void setPlayerScore(int player, int amount) // sets player scores
-        {
-            if (player == 1) StonesPlayerOne += amount;
-            else StonesPlayerTwo += amount;
-        }
+       
 
     }
 }
