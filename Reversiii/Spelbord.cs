@@ -111,9 +111,59 @@ namespace Reversiii
         }
 
         // Reversi game logic functions
+        /* 
         
-        
+        Courtesy of ChatGPT :D
+        To check if a player's piece encloses an opponent's piece in the game of Reversi, you can follow these steps:
 
+        Identify the player's piece that you want to check for enclosing an opponent's piece.
+
+        Search in all eight directions (up, down, left, right, and the four diagonals) from the player's piece.
+
+        If you find an opponent's piece in any of the eight directions, continue searching in that direction until you either find the player's piece again or reach the edge of the board.
+
+        If you find the player's piece again before reaching the edge of the board, it means that the player's piece encloses the opponent's piece and the opponent's piece should be captured and turned into the player's piece.
+         */
+
+        public bool LegalMove(int playerPlayer, int opponent, int x, int y)
+        {
+            bool legal = false;
+
+           if (boardArray[x,y] != 0)
+            {
+                legal = false;
+            }
+            else
+            {
+                
+            }
+
+            return legal;
+        }
+
+        public int GetDirectionalSpace(int x, int y, Directions direction)
+        {
+            switch (direction)
+            {
+                case Directions.Up:
+                    return boardArray[x, y - 1];
+                case Directions.Down:
+                    return boardArray[x, y + 1];
+                case Directions.UpLeft:
+                    return boardArray[x - 1, y - 1];
+                case Directions.UpRight:
+                    return boardArray[x + 1, y - 1];
+                case Directions.DownLeft:
+                    return boardArray[x - 1, y + 1];
+                case Directions.DownRight:
+                    return boardArray[x + 1, y + 1];
+                case Directions.Left:
+                    return boardArray[x - 1, y];
+                case Directions.Right:
+                    return boardArray[x + 1, y];
+            }
+            return 0;
+        }
 
         public void SwitchPlayers(int playingPlayer, int opponent)
         {
@@ -178,6 +228,19 @@ namespace Reversiii
         }
 
         //Quality of life functions :D
+
+        public enum Directions
+        {
+            Up,
+            Down,
+            Left,
+            Right,
+            UpLeft,
+            UpRight,
+            DownLeft,
+            DownRight
+        }
+
         public int[,] getBoardPosition() // gets a board position's player stone value
         {
             return boardArray;
