@@ -173,41 +173,9 @@ namespace Reversiii
                 else
                 {
                     boardArray[space.ReturnCoordinates().X, space.ReturnCoordinates().Y] = playingPlayer;
+                    this.Invalidate();
                 }
             }
-        }
-
-        // Returns the value of the space in the array
-        public int GetDirectionalSpace(int x, int y, int amount, Directions direction)
-        {
-            switch (direction)
-            {
-                case Directions.Up:
-                    if (y == 0) break;
-                    return boardArray[x, y - amount];
-                case Directions.Down:
-                    if (y == n - 1) break;
-                    return boardArray[x, y + amount];
-                case Directions.UpLeft:
-                    if (y == 0 || x == 0) break;
-                    return boardArray[x - amount, y - amount];
-                case Directions.UpRight:
-                    if (y == 0 || x == n - 1) break;
-                    return boardArray[x + amount, y - amount];
-                case Directions.DownLeft:
-                    if (y == n - 1 || x == 0) break;
-                    return boardArray[x - amount, y + amount];
-                case Directions.DownRight:
-                    if (y == n - 1 || x == n - 1) break;
-                    return boardArray[x + amount, y + amount];
-                case Directions.Left:
-                    if (x == 0) break;
-                    return boardArray[x - amount, y];
-                case Directions.Right:
-                    if (x == n - 1) break;
-                    return boardArray[x + amount, y];
-            }
-            return 0;
         }
 
         public void SwitchPlayers(int playingPlayer, int opponent)
