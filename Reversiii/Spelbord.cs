@@ -125,6 +125,12 @@ namespace Reversiii
         If you find the player's piece again before reaching the edge of the board, it means that the player's piece encloses the opponent's piece and the opponent's piece should be captured and turned into the player's piece.
          */
         
+        public bool EnclosesStone()
+        {
+            bool enclose= false;
+            
+            return enclose;
+        }
         public bool LegalMove(int playerPlayer, int opponent, int x, int y)
         {
             bool legal = false;
@@ -133,9 +139,13 @@ namespace Reversiii
             {
                 legal = false;
             }
+           else if (EnclosesStone()==true)
+            {
+                legal =true;
+            }
             else
             {
-                
+                legal = true;
             }
 
             return legal;
@@ -186,20 +196,32 @@ namespace Reversiii
 
             //makeMove(x, y, _playingPlayer, _opponent);
             
-            //draw stone on selected place
-            changeSelectedPlace(x,y,_playingPlayer);
-            
-            //stones counter
-            if (_playingPlayer == 1)
+            if (LegalMove(_playingPlayer, _opponent, x, y)==true)
             {
-                StonesPlayerOne++;
+                //draw stone on selected place
+                
+                changeSelectedPlace(x,y,_playingPlayer);
+
+                //stones counter
+                if (_playingPlayer == 1)
+                {
+                    StonesPlayerOne++;
+                 }
+                else 
+                { 
+                    StonesPlayerTwo++;
+                }
+            
+                this.Invalidate();
+            
+                SwitchPlayers(_playingPlayer,_opponent);
+
             }
-            else { StonesPlayerTwo++;
+            else
+            {
+                MessageBox.Show("Deze zet is niet geldig!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
-            this.Invalidate();
-            
-            SwitchPlayers(_playingPlayer,_opponent);
         }
 
         public void changeSelectedPlace(int x, int y, int player)
