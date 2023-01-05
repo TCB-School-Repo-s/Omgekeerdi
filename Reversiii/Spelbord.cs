@@ -132,7 +132,8 @@ namespace Reversiii
             {
                 foreach (Directions direction in Enum.GetValues(typeof(Directions)))
                 {
-                    if (GetDirectionalSpace(x, y, 1, direction) == opponent)
+                    DirectionSpace _space = new DirectionSpace(x, y, 1, direction, boardArray, n);
+                    if (_space.ReturnSpace() == opponent)
                     {
                         Debug.WriteLine("-----------------------------------");
                         Debug.WriteLine($"Space has opponent next to it, Instance UUID: {Guid.NewGuid().ToString()}");
