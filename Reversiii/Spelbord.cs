@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Reversiii.Spelbord;
 
 namespace Reversiii
 {
@@ -20,7 +21,7 @@ namespace Reversiii
 
         int _playingPlayer = 1;
         int _opponent = 2;
-        
+
 
         public Spelbord()
         {
@@ -111,68 +112,71 @@ namespace Reversiii
         }
 
         // Reversi game logic functions
-        /* 
-        
-        Courtesy of ChatGPT :D
-        To check if a player's piece encloses an opponent's piece in the game of Reversi, you can follow these steps:
 
-        Identify the player's piece that you want to check for enclosing an opponent's piece.
-
-        Search in all eight directions (up, down, left, right, and the four diagonals) from the player's piece.
-
-        If you find an opponent's piece in any of the eight directions, continue searching in that direction until you either find the player's piece again or reach the edge of the board.
-
-        If you find the player's piece again before reaching the edge of the board, it means that the player's piece encloses the opponent's piece and the opponent's piece should be captured and turned into the player's piece.
+        /*
+         * This code checks if the move you're making is legal, 
+         * and then returns an array with the first value containing if the move is valid,
+         * and the second values represents the direction the stones should be flipped
+         *
+         * TODO: The code doesn't work when using the 6x6 board, why? No clue, it works on the all the sizes except 6x6
          */
-        
-        public bool EnclosesStone()
+        public Object[] LegalMove(int playerPlayer, int opponent, int x, int y)
         {
-            bool enclose= false;
-            
-            return enclose;
-        }
-        public bool LegalMove(int playerPlayer, int opponent, int x, int y)
-        {
-            bool legal = false;
+            Object[] array = new Object[] { false, null };
 
-           if (boardArray[x,y] != 0)
+            if (boardArray[x, y] != 0)
             {
-                legal = false;
-            }
-           else if (EnclosesStone()==true)
-            {
-                legal =true;
+                array[0] = false;
             }
             else
             {
-                legal = true;
+                foreach (Directions direction in Enum.GetValues(typeof(Directions)))
+                {
+                    DirectionSpace _space = new DirectionSpace(x, y, 1, direction, boardArray, n);
+                    if (_space.ReturnSpace() == opponent)
+                    {
+                        Debug.WriteLine("-----------------------------------");
+                        Debug.WriteLine($"Space has opponent next to it, Instance UUID: {Guid.NewGuid().ToString()}");
+                        Debug.WriteLine($"Direction checking: {direction.ToString()}");
+                        array[1] = direction;
+                        for (int j = 0; x + j < boardArray.GetLength(0) && y + j < boardArray.GetLength(1); j++)
+                        {
+                            Debug.WriteLine("i is within range");
+                            DirectionSpace space = new DirectionSpace(x, y, j, direction, boardArray, n);
+                            if (space.ReturnSpace() == playerPlayer)
+                            {
+                                Debug.WriteLine("Player found!");
+                                array[0] = true;
+                                break;
+                            }
+                            else
+                            {
+                                Debug.WriteLine("Player has not yet been found");
+                            }
+                        }
+                        break;
+                    }
+                }
             }
 
-            return legal;
+            return array;
         }
 
-        public int GetDirectionalSpace(int x, int y, Directions direction)
+        public void FlipStones(Directions direction, int playingPlayer, int opponent, int x, int y)
         {
-            switch (direction)
+            for (int j = 0; x + j < boardArray.GetLength(0) && y + j < boardArray.GetLength(1); j++)
             {
-                case Directions.Up:
-                    return boardArray[x, y - 1];
-                case Directions.Down:
-                    return boardArray[x, y + 1];
-                case Directions.UpLeft:
-                    return boardArray[x - 1, y - 1];
-                case Directions.UpRight:
-                    return boardArray[x + 1, y - 1];
-                case Directions.DownLeft:
-                    return boardArray[x - 1, y + 1];
-                case Directions.DownRight:
-                    return boardArray[x + 1, y + 1];
-                case Directions.Left:
-                    return boardArray[x - 1, y];
-                case Directions.Right:
-                    return boardArray[x + 1, y];
+                DirectionSpace space = new DirectionSpace(x, y, j, direction, boardArray, n);
+                if (space.ReturnSpace() == playingPlayer)
+                {
+                    break;
+                }
+                else
+                {
+                    boardArray[space.ReturnCoordinates().X, space.ReturnCoordinates().Y] = playingPlayer;
+                    this.Invalidate();
+                }
             }
-            return 0;
         }
 
         public void SwitchPlayers(int playingPlayer, int opponent)
@@ -180,7 +184,7 @@ namespace Reversiii
             _playingPlayer = opponent;
             _opponent = playingPlayer;
         }
-        
+
 
         public void MuisClick(object sender, MouseEventArgs e)
         {
@@ -191,41 +195,26 @@ namespace Reversiii
             int x = 0 + (n - 0) * e.X / board.Width;
             int y = 0 + (n - 0) * e.Y / board.Height;
 
-            // Print the coordinates to the console
-            Debug.WriteLine($"X: {x} en Y: {y}");
+            //makeMove(x, y, _playingPlayer, _opponent
 
-            //makeMove(x, y, _playingPlayer, _opponent);
-            
-            if (LegalMove(_playingPlayer, _opponent, x, y)==true)
+            Object[] legalArray = LegalMove(_playingPlayer, _opponent, x, y);
+
+            if ((bool)legalArray[0])
             {
-                //draw stone on selected place
-                
-                changeSelectedPlace(x,y,_playingPlayer);
-
-                //stones counter
-                if (_playingPlayer == 1)
-                {
-                    StonesPlayerOne++;
-                 }
-                else 
-                { 
-                    StonesPlayerTwo++;
-                }
-            
-                this.Invalidate();
-            
-                SwitchPlayers(_playingPlayer,_opponent);
-
+                boardArray[x, y] = _playingPlayer;
+                FlipStones((Directions)legalArray[1], _playingPlayer, _opponent, x, y);
+                SwitchPlayers(_playingPlayer, _opponent);
             }
             else
             {
-                MessageBox.Show("Deze zet is niet geldig!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Illegal move");
             }
-            
+
+            this.Invalidate();
         }
 
         public void changeSelectedPlace(int x, int y, int player)
-        {   
+        {
             boardArray[x, y] = player;
         }
 
@@ -236,7 +225,6 @@ namespace Reversiii
             // Draw 6 x 6 grid using panel1 size
             float x = board.Width / (float)n;
             float y = board.Height / (float)n;
-            Debug.WriteLine($"X: {x} en Y: {y}");
             Pen pen = new Pen(Color.Black, 2.5f);
             for (int i = 0; i < n; i++)
             {
@@ -280,7 +268,7 @@ namespace Reversiii
         {
             return boardArray;
         }
-        
+
         public int getPlayerOneScore() //returns amount of Player One stones
         {
             return StonesPlayerOne;
@@ -291,7 +279,113 @@ namespace Reversiii
             return StonesPlayerTwo;
         }
 
-       
+
 
     }
+
+    internal class DirectionSpace
+    {
+        int x;
+        int y;
+        int n;
+        int amount;
+        int[,] array;
+        Spelbord.Directions direction;
+        //int opponent;
+
+        public DirectionSpace(int x, int y, int amount, Spelbord.Directions direction, int[,] array, int n)
+        {
+            this.x = x;
+            this.y = y;
+            this.amount = amount;
+            this.direction = direction;
+            this.array = array;
+            this.n = n;
+        }
+
+        public Point ReturnCoordinates()
+        {
+            int newX;
+            int newY;
+            switch (direction)
+            {
+                case Directions.Up:
+                    if (y == 0) break;
+                    newX = x;
+                    newY = y - amount;
+                    return new Point(newX, newY);
+                case Directions.Down:
+                    if (y == n - 1) break;
+                    newX = x;
+                    newY = y + amount;
+                    return new Point(newX, newY);
+                case Directions.UpLeft:
+                    if (y == 0 || x == 0) break;
+                    newX = x - amount;
+                    newY = y - amount;
+                    return new Point(newX, newY);
+                case Directions.UpRight:
+                    if (y == 0 || x == n - 1) break;
+                    newX = x + amount;
+                    newY = y - amount;
+                    return new Point(newX, newY);
+                case Directions.DownLeft:
+                    if (y == n - 1 || x == 0) break;
+                    newX = x - amount;
+                    newY = y + amount;
+                    return new Point(newX, newY);
+                case Directions.DownRight:
+                    if (y == n - 1 || x == n - 1) break;
+                    newX = x + amount;
+                    newY = y + amount;
+                    return new Point(newX, newY);
+                case Directions.Left:
+                    if (x == 0) break;
+                    newX = x - amount;
+                    newY = y;
+                    return new Point(newX, newY);
+                case Directions.Right:
+                    if (x == n - 1) break;
+                    newX = x + amount;
+                    newY = y;
+                    return new Point(newX, newY);
+            }
+            return new Point(x, y);
+        }
+
+        public int ReturnSpace()
+        {
+            switch (direction)
+            {
+                case Directions.Up:
+                    if (y == 0) break;
+                    return array[x, y - amount];
+                case Directions.Down:
+                    if (y == n - 1) break;
+                    return array[x, y + amount];
+                case Directions.UpLeft:
+                    if (y == 0 || x == 0) break;
+                    return array[x - amount, y - amount];
+                case Directions.UpRight:
+                    if (y == 0 || x == n - 1) break;
+                    return array[x + amount, y - amount];
+                case Directions.DownLeft:
+                    if (y == n - 1 || x == 0) break;
+                    return array[x - amount, y + amount];
+                case Directions.DownRight:
+                    if (y == n - 1 || x == n - 1) break;
+                    return array[x + amount, y + amount];
+                case Directions.Left:
+                    if (x == 0) break;
+                    return array[x - amount, y];
+                case Directions.Right:
+                    if (x == n - 1) break;
+                    return array[x + amount, y];
+            }
+            return 0;
+        }
+
+
+    }
+
 }
