@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Reversiii.Spelbord;
 
 namespace Reversiii
 {
@@ -140,7 +141,8 @@ namespace Reversiii
                         for (int j = 0; x + j < boardArray.GetLength(0) && y + j < boardArray.GetLength(1); j++)
                         {
                             Debug.WriteLine("i is within range");
-                            if (GetDirectionalSpace(x, y, j, direction) == playerPlayer)
+                            DirectionSpace space = new DirectionSpace(x, y, j, direction, boardArray, n);
+                            if (space.ReturnSpace() == playerPlayer)
                             {
                                 Debug.WriteLine("Player found!");
                                 array[0] = true;
@@ -157,6 +159,22 @@ namespace Reversiii
             }
 
             return array;
+        }
+
+        public void FlipStones(Directions direction, int playingPlayer, int opponent, int x, int y)
+        {
+            for (int j = 0; x + j < boardArray.GetLength(0) && y + j < boardArray.GetLength(1); j++)
+            {
+                DirectionSpace space = new DirectionSpace(x, y, j, direction, boardArray, n);
+                if (space.ReturnSpace() == playingPlayer)
+                {
+                    break;
+                }
+                else
+                {
+                    boardArray[space.ReturnCoordinates().X, space.ReturnCoordinates().Y] = playingPlayer;
+                }
+            }
         }
 
         // Returns the value of the space in the array
@@ -215,6 +233,7 @@ namespace Reversiii
             if ((bool)legalArray[0])
             {
                 boardArray[x, y] = _playingPlayer;
+                FlipStones((Directions)legalArray[1], _playingPlayer, _opponent, x, y);
                 SwitchPlayers(_playingPlayer, _opponent);
             }
             else
@@ -294,4 +313,110 @@ namespace Reversiii
 
 
     }
+
+    internal class DirectionSpace
+    {
+        int x;
+        int y;
+        int n;
+        int amount;
+        int[,] array;
+        Spelbord.Directions direction;
+        //int opponent;
+
+        public DirectionSpace(int x, int y, int amount, Spelbord.Directions direction, int[,] array, int n)
+        {
+            this.x = x;
+            this.y = y;
+            this.amount = amount;
+            this.direction = direction;
+            this.array = array;
+            this.n = n;
+        }
+
+        public Point ReturnCoordinates()
+        {
+            int newX;
+            int newY;
+            switch (direction)
+            {
+                case Directions.Up:
+                    if (y == 0) break;
+                    newX = x;
+                    newY = y - amount;
+                    return new Point(newX, newY);
+                case Directions.Down:
+                    if (y == n - 1) break;
+                    newX = x;
+                    newY = y + amount;
+                    return new Point(newX, newY);
+                case Directions.UpLeft:
+                    if (y == 0 || x == 0) break;
+                    newX = x - amount;
+                    newY = y - amount;
+                    return new Point(newX, newY);
+                case Directions.UpRight:
+                    if (y == 0 || x == n - 1) break;
+                    newX = x + amount;
+                    newY = y - amount;
+                    return new Point(newX, newY);
+                case Directions.DownLeft:
+                    if (y == n - 1 || x == 0) break;
+                    newX = x - amount;
+                    newY = y + amount;
+                    return new Point(newX, newY);
+                case Directions.DownRight:
+                    if (y == n - 1 || x == n - 1) break;
+                    newX = x + amount;
+                    newY = y + amount;
+                    return new Point(newX, newY);
+                case Directions.Left:
+                    if (x == 0) break;
+                    newX = x - amount;
+                    newY = y;
+                    return new Point(newX, newY);
+                case Directions.Right:
+                    if (x == n - 1) break;
+                    newX = x + amount;
+                    newY = y;
+                    return new Point(newX, newY);
+            }
+            return new Point(x, y);
+        }
+
+        public int ReturnSpace()
+        {
+            switch (direction)
+            {
+                case Directions.Up:
+                    if (y == 0) break;
+                    return array[x, y - amount];
+                case Directions.Down:
+                    if (y == n - 1) break;
+                    return array[x, y + amount];
+                case Directions.UpLeft:
+                    if (y == 0 || x == 0) break;
+                    return array[x - amount, y - amount];
+                case Directions.UpRight:
+                    if (y == 0 || x == n - 1) break;
+                    return array[x + amount, y - amount];
+                case Directions.DownLeft:
+                    if (y == n - 1 || x == 0) break;
+                    return array[x - amount, y + amount];
+                case Directions.DownRight:
+                    if (y == n - 1 || x == n - 1) break;
+                    return array[x + amount, y + amount];
+                case Directions.Left:
+                    if (x == 0) break;
+                    return array[x - amount, y];
+                case Directions.Right:
+                    if (x == n - 1) break;
+                    return array[x + amount, y];
+            }
+            return 0;
+        }
+
+
+    }
+
 }
