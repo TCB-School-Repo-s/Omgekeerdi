@@ -94,10 +94,10 @@ namespace Reversiii
             }
 
             // set the initial stones on the board
-            boardArray[n / 2 - 1, n / 2 - 1] = 1;
-            boardArray[n / 2, n / 2] = 1;
-            boardArray[n / 2 - 1, n / 2] = 2;
-            boardArray[n / 2, n / 2 - 1] = 2;
+            boardArray[n / 2 - 1, n / 2 - 1] = 2;
+            boardArray[n / 2, n / 2] = 2;
+            boardArray[n / 2 - 1, n / 2] = 1;
+            boardArray[n / 2, n / 2 - 1] = 1;
 
             // set the initial stone counter
             this.StonesPlayerOne = 2;
@@ -118,7 +118,7 @@ namespace Reversiii
          * and then returns an array with the first value containing if the move is valid,
          * and the second values represents the direction the stones should be flipped
          *
-         * TODO: The code doesn't work when using the 6x6 board, why? No clue, it works on the all the sizes except 6x6
+         * TODO: If one direction provides and illegal move, it doesn't continue to check if the other directions have legal moves.
          */
         public Object[] LegalMove(int playerPlayer, int opponent, int x, int y)
         {
@@ -147,6 +147,7 @@ namespace Reversiii
                             {
                                 Debug.WriteLine("Player found!");
                                 array[0] = true;
+                                FlipStones(direction, playerPlayer, opponent, x, y);
                                 break;
                             }
                             else
@@ -154,7 +155,6 @@ namespace Reversiii
                                 Debug.WriteLine("Player has not yet been found");
                             }
                         }
-                        break;
                     }
                 }
             }
@@ -164,15 +164,18 @@ namespace Reversiii
 
         public void FlipStones(Directions direction, int playingPlayer, int opponent, int x, int y)
         {
-            for (int j = 0; x + j < boardArray.GetLength(0) && y + j < boardArray.GetLength(1); j++)
+            for (int j = 1; x + j < boardArray.GetLength(0) && y + j < boardArray.GetLength(1); j++)
             {
+                Debug.WriteLine("If this appears everything is going right....");
                 DirectionSpace space = new DirectionSpace(x, y, j, direction, boardArray, n);
                 if (space.ReturnSpace() == playingPlayer)
                 {
+                    Debug.WriteLine("Break");
                     break;
                 }
                 else
                 {
+                    Debug.WriteLine($"Flipping stones: {space.ReturnCoordinates().X},{space.ReturnCoordinates().Y}");
                     boardArray[space.ReturnCoordinates().X, space.ReturnCoordinates().Y] = playingPlayer;
                     this.Invalidate();
                 }
@@ -202,7 +205,6 @@ namespace Reversiii
             if ((bool)legalArray[0])
             {
                 boardArray[x, y] = _playingPlayer;
-                FlipStones((Directions)legalArray[1], _playingPlayer, _opponent, x, y);
                 SwitchPlayers(_playingPlayer, _opponent);
             }
             else

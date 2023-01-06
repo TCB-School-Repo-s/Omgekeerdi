@@ -31,6 +31,7 @@ namespace Reversiii
                     break;
             }
             spelbord1.BoardSize = n;
+            spelbord1.SwitchPlayers(2, 1);
             spelbord1.resetGame();
         }
 
