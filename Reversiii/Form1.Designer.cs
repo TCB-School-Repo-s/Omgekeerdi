@@ -50,7 +50,6 @@
             this.x14ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x16ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gameRulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,29 +74,32 @@
             this.groupBox1.Size = new System.Drawing.Size(313, 217);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Game instellingen";
+            this.groupBox1.Text = "Game Settings";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 15);
+            this.label1.Size = new System.Drawing.Size(61, 15);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Bord Grootte";
+            this.label1.Text = "Board Size";
             // 
             // comboBox1
             // 
-            this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "6x6",
             "8x8",
             "10x10",
             "12x12",
-            "16x16"});
-            this.comboBox1.Location = new System.Drawing.Point(87, 21);
+            "16x16",
+            "32x32",
+            "64x64",
+            "128x128",
+            "256x256"});
+            this.comboBox1.Location = new System.Drawing.Point(73, 21);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(220, 23);
+            this.comboBox1.Size = new System.Drawing.Size(234, 23);
             this.comboBox1.TabIndex = 2;
             // 
             // button2
@@ -107,7 +109,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(303, 22);
             this.button2.TabIndex = 1;
-            this.button2.Text = "Help";
+            this.button2.Text = "Hint";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // button1
@@ -117,7 +119,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(303, 22);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Nieuw spel";
+            this.button1.Text = "New Game";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -134,13 +136,13 @@
             this.groupBox2.Size = new System.Drawing.Size(313, 278);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Game Statistieken";
+            this.groupBox2.Text = "Game Statistics";
             // 
             // playerTwoLabel
             // 
             this.playerTwoLabel.AutoSize = true;
             this.playerTwoLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.playerTwoLabel.Location = new System.Drawing.Point(87, 188);
+            this.playerTwoLabel.Location = new System.Drawing.Point(87, 198);
             this.playerTwoLabel.Name = "playerTwoLabel";
             this.playerTwoLabel.Size = new System.Drawing.Size(63, 25);
             this.playerTwoLabel.TabIndex = 3;
@@ -150,7 +152,7 @@
             // 
             this.playerOneLabel.AutoSize = true;
             this.playerOneLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.playerOneLabel.Location = new System.Drawing.Point(87, 69);
+            this.playerOneLabel.Location = new System.Drawing.Point(87, 77);
             this.playerOneLabel.Name = "playerOneLabel";
             this.playerOneLabel.Size = new System.Drawing.Size(63, 25);
             this.playerOneLabel.TabIndex = 2;
@@ -158,7 +160,7 @@
             // 
             // playerTwoScore
             // 
-            this.playerTwoScore.Location = new System.Drawing.Point(6, 164);
+            this.playerTwoScore.Location = new System.Drawing.Point(6, 174);
             this.playerTwoScore.Name = "playerTwoScore";
             this.playerTwoScore.Size = new System.Drawing.Size(75, 77);
             this.playerTwoScore.TabIndex = 1;
@@ -167,7 +169,7 @@
             // 
             // playerOneScore
             // 
-            this.playerOneScore.Location = new System.Drawing.Point(6, 49);
+            this.playerOneScore.Location = new System.Drawing.Point(6, 52);
             this.playerOneScore.Name = "playerOneScore";
             this.playerOneScore.Size = new System.Drawing.Size(75, 77);
             this.playerOneScore.TabIndex = 0;
@@ -248,19 +250,12 @@
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(912, 24);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
             // 
             // helpToolStripMenuItem
             // 
@@ -325,7 +320,6 @@
         private Label label1;
         private ComboBox comboBox1;
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem helpToolStripMenuItem;
         private ToolStripMenuItem gameRulesToolStripMenuItem;
         private ToolStripMenuItem aboutToolStripMenuItem;

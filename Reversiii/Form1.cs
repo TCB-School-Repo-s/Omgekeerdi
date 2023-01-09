@@ -12,27 +12,47 @@ namespace Reversiii
         private void button1_Click(object sender, EventArgs e)
         {
             int n = 6;
-            switch (comboBox1.SelectedItem.ToString())
+            
+            if(comboBox1.SelectedItem == null)
             {
-                case "6x6":
-                    n = 6;
-                    break;
-                case "8x8":
-                    n = 8;
-                    break;
-                case "10x10":
-                    n = 10;
-                    break;
-                case "12x12":
-                    n = 12;
-                    break;
-                case "16x16":
-                    n = 16;
-                    break;
+                MessageBox.Show("Board size selection box has an invalid parameter!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            spelbord1.BoardSize = n;
-            spelbord1.SwitchPlayers(2, 1);
-            spelbord1.resetGame();
+            else
+            {
+                switch (comboBox1.SelectedItem.ToString())
+                {
+                    case "6x6":
+                        n = 6;
+                        break;
+                    case "8x8":
+                        n = 8;
+                        break;
+                    case "10x10":
+                        n = 10;
+                        break;
+                    case "12x12":
+                        n = 12;
+                        break;
+                    case "16x16":
+                        n = 16;
+                        break;
+                    case "32x32":
+                        n = 32;
+                        break;
+                    case "64x64":
+                        n = 64;
+                        break;
+                    case "128x128":
+                        n = 128;
+                        break;
+                    case "256x256":
+                        n = 256;
+                        break;
+                }
+                spelbord1.BoardSize = n;
+                spelbord1.SwitchPlayers(2, 1);
+                spelbord1.resetGame();
+            }
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -57,8 +77,16 @@ namespace Reversiii
         {
             Spelbord bord = (Spelbord)sender;
 
-            playerOneLabel.Text = bord.getPlayerOneScore().ToString();
-            playerTwoLabel.Text = bord.getPlayerTwoScore().ToString();
+            if(bord.getPlayingPlayer() == 1)
+            {
+                playerOneLabel.Text = $"{bord.getPlayerOneScore()} stones - Turn";
+                playerTwoLabel.Text = $"{bord.getPlayerTwoScore()} stones";
+            }
+            else
+            {
+                playerOneLabel.Text = $"{bord.getPlayerOneScore()} stones";
+                playerTwoLabel.Text = $"{bord.getPlayerTwoScore()} stones - Turn";
+            }
 
         }
 
