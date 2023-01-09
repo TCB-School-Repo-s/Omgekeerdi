@@ -95,16 +95,16 @@ namespace Reversiii
         private void spelbord1_Paint(object sender, PaintEventArgs e)
         {
             Spelbord bord = (Spelbord)sender;
-
+            
             if(bord.getPlayingPlayer() == 1)
             {
-                playerOneLabel.Text = $"{bord.getPlayerOneScore()} stones - Turn";
+                playerOneLabel.Text = $"{bord.getPlayerOneScore()} stones - {Form2.name1}'s turn";
                 playerTwoLabel.Text = $"{bord.getPlayerTwoScore()} stones";
             }
             else
             {
                 playerOneLabel.Text = $"{bord.getPlayerOneScore()} stones";
-                playerTwoLabel.Text = $"{bord.getPlayerTwoScore()} stones - Turn";
+                playerTwoLabel.Text = $"{bord.getPlayerTwoScore()} stones - {Form2.name2}'s turn";
             }
 
         }

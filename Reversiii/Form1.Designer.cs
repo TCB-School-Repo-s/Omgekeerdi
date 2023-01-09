@@ -80,7 +80,7 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Location = new System.Drawing.Point(674, 33);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(358, 289);
+            this.groupBox1.Size = new System.Drawing.Size(367, 289);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Game Settings";
@@ -192,7 +192,7 @@
             this.groupBox2.Controls.Add(this.playerOneScore);
             this.groupBox2.Location = new System.Drawing.Point(674, 329);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(358, 455);
+            this.groupBox2.Size = new System.Drawing.Size(367, 455);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Game Statistics";
@@ -248,7 +248,7 @@
             this.spelbord1.PlayerOneColor = System.Drawing.Color.Black;
             this.spelbord1.PlayerTwoColor = System.Drawing.Color.White;
             this.spelbord1.ShowHelp = false;
-            this.spelbord1.Size = new System.Drawing.Size(651, 760);
+            this.spelbord1.Size = new System.Drawing.Size(654, 760);
             this.spelbord1.TabIndex = 3;
             this.spelbord1.Paint += new System.Windows.Forms.PaintEventHandler(this.spelbord1_Paint);
             // 
@@ -317,7 +317,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1042, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1053, 30);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -333,14 +333,14 @@
             // gameRulesToolStripMenuItem
             // 
             this.gameRulesToolStripMenuItem.Name = "gameRulesToolStripMenuItem";
-            this.gameRulesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.gameRulesToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
             this.gameRulesToolStripMenuItem.Text = "Game rules";
             this.gameRulesToolStripMenuItem.Click += new System.EventHandler(this.gameRulesToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -348,7 +348,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1042, 813);
+            this.ClientSize = new System.Drawing.Size(1053, 813);
             this.Controls.Add(this.spelbord1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

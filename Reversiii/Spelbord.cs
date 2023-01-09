@@ -231,7 +231,9 @@ namespace Reversiii
 
         public void Win(int winningPlayer, int losingPlayer)
         {
-            MessageBox.Show($"Speler {winningPlayer} heeft gewonnen!");
+            if (winningPlayer == 1) 
+            MessageBox.Show($"Speler {winningPlayer} {Form2.name1} heeft gewonnen!");
+            else MessageBox.Show($"Speler {winningPlayer} {Form2.name2} heeft gewonnen!");
         }
 
 
