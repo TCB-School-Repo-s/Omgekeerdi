@@ -182,6 +182,15 @@ namespace Reversiii
                 playingSongLabel.Text = $"Now playing: {playlist[songIndex].GetTitle()} by {playlist[songIndex].GetAuthor()}";
             }
         }
+
+        private void gameRulesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process process = new Process(); 
+            process.StartInfo.UseShellExecute = true; 
+            process.StartInfo.FileName = "chrome"; 
+            process.StartInfo.Arguments = @"https://en.wikipedia.org/wiki/Reversi"; 
+            process.Start();
+        }
     }
 
     internal class Song
