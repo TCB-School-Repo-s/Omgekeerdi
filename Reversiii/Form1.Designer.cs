@@ -111,6 +111,7 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "Hint";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -185,6 +186,7 @@
             this.spelbord1.Name = "spelbord1";
             this.spelbord1.PlayerOneColor = System.Drawing.Color.Black;
             this.spelbord1.PlayerTwoColor = System.Drawing.Color.White;
+            this.spelbord1.ShowHelp = false;
             this.spelbord1.Size = new System.Drawing.Size(572, 500);
             this.spelbord1.TabIndex = 3;
             this.spelbord1.Paint += new System.Windows.Forms.PaintEventHandler(this.spelbord1_Paint);

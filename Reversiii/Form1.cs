@@ -95,5 +95,10 @@ namespace Reversiii
             comboBox1.SelectedIndex = 0;
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            spelbord1.ShowHelp = true;
+            spelbord1.Invalidate();
+        }
     }
 }

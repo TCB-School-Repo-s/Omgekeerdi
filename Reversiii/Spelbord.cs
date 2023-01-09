@@ -19,6 +19,7 @@ namespace Reversiii
         int StonesPlayerOne;
         int StonesPlayerTwo;
         int[,] boardArray;
+        bool help = false;
 
         int _playingPlayer = 1;
         int _opponent = 2;
@@ -50,6 +51,18 @@ namespace Reversiii
                 boardArray = new int[n, n];
                 this.Invalidate();
                 InitializeBoard();
+            }
+        }
+        
+        public bool ShowHelp
+        {
+            get {
+                return help;
+            }
+            set
+            {
+                help = value;
+                this.Invalidate();
             }
         }
 
@@ -187,6 +200,7 @@ namespace Reversiii
         {
             _playingPlayer = opponent;
             _opponent = playingPlayer;
+            this.ShowHelp = false;
             CountScores();
         }
 
@@ -210,7 +224,6 @@ namespace Reversiii
             {
                 MessageBox.Show("I'm sorry, but that move is not legal! Perhaps try a hint?", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
             this.Invalidate();
         }
 
@@ -234,6 +247,13 @@ namespace Reversiii
             {
                 for (int j = 0; j < n; j++)
                 {
+                    if (this.ShowHelp)
+                    {
+                        if (CheckMove(i, j))
+                        {
+                            e.Graphics.DrawEllipse(new Pen(Color.Red), i * x + 5, j * y + 5, x - 10, y - 10);
+                        }
+                    }
                     if (boardArray[i, j] == 1)
                     {
                         e.Graphics.FillEllipse(new SolidBrush(ColorOne), i * x + 5, j * y + 5, x - 10, y - 10);
