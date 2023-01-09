@@ -198,10 +198,40 @@ namespace Reversiii
 
         public void SwitchPlayers(int playingPlayer, int opponent)
         {
-            _playingPlayer = opponent;
-            _opponent = playingPlayer;
-            this.ShowHelp = false;
-            CountScores();
+
+            bool anyMovesLeft = false;
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    if (CheckMove(i, j))
+                    {
+                        anyMovesLeft = true;
+                    }
+                }
+            }
+
+            if (anyMovesLeft)
+            {
+                _playingPlayer = opponent;
+                _opponent = playingPlayer;
+                this.ShowHelp = false;
+                CountScores();
+            }
+            else
+            {
+                CountScores();
+                int winningPlayer = getPlayerOneScore() > getPlayerTwoScore() ? 1 : 2;
+                int losingPlayer = getPlayerOneScore() > getPlayerTwoScore() ? 2 : 1;
+                Win(winningPlayer, losingPlayer);
+            }
+
+            
+        }
+
+        public void Win(int winningPlayer, int losingPlayer)
+        {
+            MessageBox.Show($"Speler {winningPlayer} heeft gewonnen!");
         }
 
 
