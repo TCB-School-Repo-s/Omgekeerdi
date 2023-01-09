@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using static Reversiii.Spelbord;
@@ -118,63 +119,103 @@ namespace Reversiii
          * and then returns an array with the first value containing if the move is valid,
          * and the second values represents the direction the stones should be flipped
          *
-         * TODO: The code doesn't work when using the 6x6 board, why? No clue, it works on the all the sizes except 6x6
+         * TODO: If one direction provides and illegal move, it doesn't continue to check if the other directions have legal moves.
          */
-        public Object[] LegalMove(int playerPlayer, int opponent, int x, int y)
-        {
-            Object[] array = new Object[] { false, null };
 
-            if (boardArray[x, y] != 0)
+        public bool FindEnclosure(int i, int j, int di, int dj, bool play = false, bool first = true)
+        {
+            // Function that finds enclosed stones, and plays the stones if play is true
+            if (i == 0 || j == 0 || i == n - 1 || j == n - 1)
             {
-                array[0] = false;
+                return false;
             }
-            else
+            if (boardArray[i, j] == 0)
             {
-                foreach (Directions direction in Enum.GetValues(typeof(Directions)))
+                return false;
+            }
+            if (boardArray[i, j] == _playingPlayer)
+            {
+                return true;
+            }
+            if (FindEnclosure(i + di, j + dj, di, dj, play, false))
+            {
+                if (play)
                 {
-                    DirectionSpace _space = new DirectionSpace(x, y, 1, direction, boardArray, n);
-                    if (_space.ReturnSpace() == opponent)
+                    boardArray[i, j] = _playingPlayer;
+                    if (_playingPlayer == 1)
                     {
-                        Debug.WriteLine("-----------------------------------");
-                        Debug.WriteLine($"Space has opponent next to it, Instance UUID: {Guid.NewGuid().ToString()}");
-                        Debug.WriteLine($"Direction checking: {direction.ToString()}");
-                        array[1] = direction;
-                        for (int j = 0; x + j < boardArray.GetLength(0) && y + j < boardArray.GetLength(1); j++)
-                        {
-                            Debug.WriteLine("i is within range");
-                            DirectionSpace space = new DirectionSpace(x, y, j, direction, boardArray, n);
-                            if (space.ReturnSpace() == playerPlayer)
-                            {
-                                Debug.WriteLine("Player found!");
-                                array[0] = true;
-                                break;
-                            }
-                            else
-                            {
-                                Debug.WriteLine("Player has not yet been found");
-                            }
-                        }
-                        break;
+                        StonesPlayerOne++;
+                        StonesPlayerTwo--;
+                    }
+                    else
+                    {
+                        StonesPlayerOne--;
+                        StonesPlayerTwo++;
                     }
                 }
+                return true;
             }
-
-            return array;
+            return false;
         }
 
-        public void FlipStones(Directions direction, int playingPlayer, int opponent, int x, int y)
+        //Function that checks if move is legal
+        public bool CheckMove(int i, int j)
         {
-            for (int j = 0; x + j < boardArray.GetLength(0) && y + j < boardArray.GetLength(1); j++)
+            if (boardArray[i, j] != 0)
             {
-                DirectionSpace space = new DirectionSpace(x, y, j, direction, boardArray, n);
-                if (space.ReturnSpace() == playingPlayer)
+                return false;
+            }
+            if (FindEnclosure(i - 1, j - 1, -1, -1))
+            {
+                return true;
+            }
+            if (FindEnclosure(i - 1, j, -1, 0))
+            {
+                return true;
+            }
+            if (FindEnclosure(i - 1, j + 1, -1, 1))
+            {
+                return true;
+            }
+            if (FindEnclosure(i, j - 1, 0, -1))
+            {
+                return true;
+            }
+            if (FindEnclosure(i, j + 1, 0, 1))
+            {
+                return true;
+            }
+            if (FindEnclosure(i + 1, j - 1, 1, -1))
+            {
+                return true;
+            }
+            if (FindEnclosure(i + 1, j, 1, 0))
+            {
+                return true;
+            }
+            if (FindEnclosure(i + 1, j + 1, 1, 1))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void PlayStones(int p, int q, int ddx, int ddy)
+        {
+            if (boardArray[p,q] != _playingPlayer)
+            {
+                boardArray[p, q] = _playingPlayer;
+                PlayStones(p + ddx, q + ddy, ddx, ddy);
+            }
+        }
+
+        public void Play(int x, int y)
+        {
+            for (int i = -1; i <= 1; i++)
+            {
+                for(int j = -1; j <= 1; j++)
                 {
-                    break;
-                }
-                else
-                {
-                    boardArray[space.ReturnCoordinates().X, space.ReturnCoordinates().Y] = playingPlayer;
-                    this.Invalidate();
+                    if (!(i == 0 && j == 0)) FindEnclosure(x + i, y + j, i, j, true);
                 }
             }
         }
@@ -192,22 +233,22 @@ namespace Reversiii
             Spelbord board = (Spelbord)sender;
 
             // Calculate x and y coordinates of the click
-            int x = 0 + (n - 0) * e.X / board.Width;
-            int y = 0 + (n - 0) * e.Y / board.Height;
+            int x = n * e.X / board.Width;
+            int y = n * e.Y / board.Height;
 
-            //makeMove(x, y, _playingPlayer, _opponent
+            Debug.WriteLine($"board.Width: {board.Width} en board.Height: {board.Height}");
+            Debug.WriteLine($"e.X: {e.X} en e.Y: {e.Y}");
+            Debug.WriteLine($"X: {x} en Y: {y}");
 
-            Object[] legalArray = LegalMove(_playingPlayer, _opponent, x, y);
-
-            if ((bool)legalArray[0])
+            if (CheckMove(x, y))
             {
                 boardArray[x, y] = _playingPlayer;
-                FlipStones((Directions)legalArray[1], _playingPlayer, _opponent, x, y);
-                SwitchPlayers(_playingPlayer, _opponent);
+                Play(x, y);
+                SwitchPlayers(_playingPlayer, _opponent); this.Invalidate();
             }
             else
             {
-                MessageBox.Show("Illegal move");
+                MessageBox.Show("De move die wil is niet legaal", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             this.Invalidate();
@@ -279,111 +320,6 @@ namespace Reversiii
             return StonesPlayerTwo;
         }
 
-
-
-    }
-
-    internal class DirectionSpace
-    {
-        int x;
-        int y;
-        int n;
-        int amount;
-        int[,] array;
-        Spelbord.Directions direction;
-        //int opponent;
-
-        public DirectionSpace(int x, int y, int amount, Spelbord.Directions direction, int[,] array, int n)
-        {
-            this.x = x;
-            this.y = y;
-            this.amount = amount;
-            this.direction = direction;
-            this.array = array;
-            this.n = n;
-        }
-
-        public Point ReturnCoordinates()
-        {
-            int newX;
-            int newY;
-            switch (direction)
-            {
-                case Directions.Up:
-                    if (y == 0) break;
-                    newX = x;
-                    newY = y - amount;
-                    return new Point(newX, newY);
-                case Directions.Down:
-                    if (y == n - 1) break;
-                    newX = x;
-                    newY = y + amount;
-                    return new Point(newX, newY);
-                case Directions.UpLeft:
-                    if (y == 0 || x == 0) break;
-                    newX = x - amount;
-                    newY = y - amount;
-                    return new Point(newX, newY);
-                case Directions.UpRight:
-                    if (y == 0 || x == n - 1) break;
-                    newX = x + amount;
-                    newY = y - amount;
-                    return new Point(newX, newY);
-                case Directions.DownLeft:
-                    if (y == n - 1 || x == 0) break;
-                    newX = x - amount;
-                    newY = y + amount;
-                    return new Point(newX, newY);
-                case Directions.DownRight:
-                    if (y == n - 1 || x == n - 1) break;
-                    newX = x + amount;
-                    newY = y + amount;
-                    return new Point(newX, newY);
-                case Directions.Left:
-                    if (x == 0) break;
-                    newX = x - amount;
-                    newY = y;
-                    return new Point(newX, newY);
-                case Directions.Right:
-                    if (x == n - 1) break;
-                    newX = x + amount;
-                    newY = y;
-                    return new Point(newX, newY);
-            }
-            return new Point(x, y);
-        }
-
-        public int ReturnSpace()
-        {
-            switch (direction)
-            {
-                case Directions.Up:
-                    if (y == 0) break;
-                    return array[x, y - amount];
-                case Directions.Down:
-                    if (y == n - 1) break;
-                    return array[x, y + amount];
-                case Directions.UpLeft:
-                    if (y == 0 || x == 0) break;
-                    return array[x - amount, y - amount];
-                case Directions.UpRight:
-                    if (y == 0 || x == n - 1) break;
-                    return array[x + amount, y - amount];
-                case Directions.DownLeft:
-                    if (y == n - 1 || x == 0) break;
-                    return array[x - amount, y + amount];
-                case Directions.DownRight:
-                    if (y == n - 1 || x == n - 1) break;
-                    return array[x + amount, y + amount];
-                case Directions.Left:
-                    if (x == 0) break;
-                    return array[x - amount, y];
-                case Directions.Right:
-                    if (x == n - 1) break;
-                    return array[x + amount, y];
-            }
-            return 0;
-        }
 
 
     }
