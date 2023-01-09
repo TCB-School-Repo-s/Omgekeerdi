@@ -19,6 +19,7 @@ namespace Reversiii
         int StonesPlayerOne;
         int StonesPlayerTwo;
         int[,] boardArray;
+        bool help = false;
 
         int _playingPlayer = 1;
         int _opponent = 2;
@@ -50,6 +51,18 @@ namespace Reversiii
                 boardArray = new int[n, n];
                 this.Invalidate();
                 InitializeBoard();
+            }
+        }
+        
+        public bool ShowHelp
+        {
+            get {
+                return help;
+            }
+            set
+            {
+                help = value;
+                this.Invalidate();
             }
         }
 
@@ -112,20 +125,10 @@ namespace Reversiii
             this.Invalidate();
         }
 
-        // Reversi game logic functions
-
-        /*
-         * This code checks if the move you're making is legal, 
-         * and then returns an array with the first value containing if the move is valid,
-         * and the second values represents the direction the stones should be flipped
-         *
-         * TODO: If one direction provides and illegal move, it doesn't continue to check if the other directions have legal moves.
-         */
-
-        public bool FindEnclosure(int i, int j, int di, int dj, bool play = false, bool first = true)
+        public bool FindEnclosure(int i, int j, int di, int dj, bool currentlyPlaying = false, bool firstStone = true)
         {
             // Function that finds enclosed stones, and plays the stones if play is true
-            if (i == 0 || j == 0 || i == n - 1 || j == n - 1)
+            if (i < 0 || j < 0 || i > n - 1 || j > n - 1)
             {
                 return false;
             }
@@ -135,77 +138,50 @@ namespace Reversiii
             }
             if (boardArray[i, j] == _playingPlayer)
             {
+                if (firstStone) return false;
                 return true;
             }
-            if (FindEnclosure(i + di, j + dj, di, dj, play, false))
+            if (FindEnclosure(i + di, j + dj, di, dj, currentlyPlaying, false))
             {
-                if (play)
+                if (currentlyPlaying)
                 {
-                    boardArray[i, j] = _playingPlayer;
-                    if (_playingPlayer == 1)
-                    {
-                        StonesPlayerOne++;
-                        StonesPlayerTwo--;
-                    }
-                    else
-                    {
-                        StonesPlayerOne--;
-                        StonesPlayerTwo++;
-                    }
+                    PlayStones(i, j, di, dj);
                 }
                 return true;
             }
             return false;
         }
+        
 
         //Function that checks if move is legal
-        public bool CheckMove(int i, int j)
+        public bool CheckMove(int x, int y)
         {
-            if (boardArray[i, j] != 0)
+            if (boardArray[x, y] != 0)
             {
                 return false;
             }
-            if (FindEnclosure(i - 1, j - 1, -1, -1))
+            for(int i = -1; i <= 1; i++)
             {
-                return true;
-            }
-            if (FindEnclosure(i - 1, j, -1, 0))
-            {
-                return true;
-            }
-            if (FindEnclosure(i - 1, j + 1, -1, 1))
-            {
-                return true;
-            }
-            if (FindEnclosure(i, j - 1, 0, -1))
-            {
-                return true;
-            }
-            if (FindEnclosure(i, j + 1, 0, 1))
-            {
-                return true;
-            }
-            if (FindEnclosure(i + 1, j - 1, 1, -1))
-            {
-                return true;
-            }
-            if (FindEnclosure(i + 1, j, 1, 0))
-            {
-                return true;
-            }
-            if (FindEnclosure(i + 1, j + 1, 1, 1))
-            {
-                return true;
+                for(int j = -1; j<= 1; j++)
+                {
+                    if(!(i == 0 && j == 0))
+                    {
+                        if (FindEnclosure(x + i, y+j, i, j, false, true))
+                        {
+                            return true;
+                        }
+                    }
+                }
             }
             return false;
         }
 
-        public void PlayStones(int p, int q, int ddx, int ddy)
+        public void PlayStones(int x, int y, int dx, int dy)
         {
-            if (boardArray[p,q] != _playingPlayer)
+            if (boardArray[x,y] != _playingPlayer)
             {
-                boardArray[p, q] = _playingPlayer;
-                PlayStones(p + ddx, q + ddy, ddx, ddy);
+                boardArray[x, y] = _playingPlayer;
+                PlayStones(x + dx, y + dy, dx, dy);
             }
         }
 
@@ -224,6 +200,8 @@ namespace Reversiii
         {
             _playingPlayer = opponent;
             _opponent = playingPlayer;
+            this.ShowHelp = false;
+            CountScores();
         }
 
 
@@ -236,10 +214,6 @@ namespace Reversiii
             int x = n * e.X / board.Width;
             int y = n * e.Y / board.Height;
 
-            Debug.WriteLine($"board.Width: {board.Width} en board.Height: {board.Height}");
-            Debug.WriteLine($"e.X: {e.X} en e.Y: {e.Y}");
-            Debug.WriteLine($"X: {x} en Y: {y}");
-
             if (CheckMove(x, y))
             {
                 boardArray[x, y] = _playingPlayer;
@@ -248,15 +222,9 @@ namespace Reversiii
             }
             else
             {
-                MessageBox.Show("De move die wil is niet legaal", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("I'm sorry, but that move is not legal! Perhaps try a hint?", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
             this.Invalidate();
-        }
-
-        public void changeSelectedPlace(int x, int y, int player)
-        {
-            boardArray[x, y] = player;
         }
 
         public void DrawBoard(object? sender, PaintEventArgs e)
@@ -279,6 +247,13 @@ namespace Reversiii
             {
                 for (int j = 0; j < n; j++)
                 {
+                    if (this.ShowHelp)
+                    {
+                        if (CheckMove(i, j))
+                        {
+                            e.Graphics.DrawEllipse(new Pen(Color.Red), i * x + 5, j * y + 5, x - 10, y - 10);
+                        }
+                    }
                     if (boardArray[i, j] == 1)
                     {
                         e.Graphics.FillEllipse(new SolidBrush(ColorOne), i * x + 5, j * y + 5, x - 10, y - 10);
@@ -293,23 +268,30 @@ namespace Reversiii
 
         //Quality of life functions :D
 
-        public enum Directions
-        {
-            Up,
-            Down,
-            Left,
-            Right,
-            UpLeft,
-            UpRight,
-            DownLeft,
-            DownRight
-        }
-
-        public int[,] getBoardPosition() // gets a board position's player stone value
+        public int[,] getBoard() // gets a board position's player stone value
         {
             return boardArray;
         }
 
+        private void CountScores()
+        {
+            StonesPlayerOne = 0;
+            StonesPlayerTwo = 0;
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    if (boardArray[i, j] == 1) StonesPlayerOne++; else if (boardArray[i, j] == 2) StonesPlayerTwo++;
+                }
+            }
+            this.Invalidate();
+        }
+
+        public int getPlayingPlayer()
+        {
+            return _playingPlayer;
+        }
+        
         public int getPlayerOneScore() //returns amount of Player One stones
         {
             return StonesPlayerOne;
