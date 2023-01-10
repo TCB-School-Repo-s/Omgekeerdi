@@ -86,12 +86,15 @@ namespace Reversiii
                         break;
                     case "64x64":
                         n = 64;
+                        MessageBox.Show("Not playable per se! Just for fun :D If you computer crashes, I am not liable.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
                     case "128x128":
                         n = 128;
+                        MessageBox.Show("Not playable per se! Just for fun :D If you computer crashes, I am not liable.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
                     case "256x256":
                         n = 256;
+                        MessageBox.Show("Not playable per se! Just for fun :D If you computer crashes, I am not liable.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
                 }
                 spelbord1.BoardSize = n;
