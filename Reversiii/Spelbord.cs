@@ -202,6 +202,9 @@ namespace Reversiii
         public void SwitchPlayers(int playingPlayer, int opponent, bool secondTry = false)
         {
 
+            _playingPlayer = opponent;
+            _opponent = playingPlayer;
+            CountScores();
             // Check if there are any moves left, if not switch to other player, if that player has no moves either, then it's game over
             bool moveLeft = false;
             //ShowHelp = false;
@@ -216,34 +219,40 @@ namespace Reversiii
                     }
                 }
             }
+
+            if(getPlayerOneScore() + getPlayerTwoScore() == n * n)
+            {
+                if (getPlayerOneScore() == getPlayerTwoScore())
+                {
+                    Win(playingPlayer, opponent, true);
+                }
+                else
+                {
+                    int winningPlayer = getPlayerOneScore() > getPlayerTwoScore() ? 1 : 2;
+                    int losingPlayer = getPlayerOneScore() > getPlayerTwoScore() ? 2 : 1;
+                    Win(winningPlayer, losingPlayer);
+                }
+                return;
+            }
+            
             if (!moveLeft)
             {
-                CountScores();
                 if (secondTry)
                 {
-                    CountScores();
                     if(getPlayerOneScore() == getPlayerTwoScore())
                     {
-                        CountScores();
                         Win(playingPlayer, opponent, true);
                     }
                     else
                     {
-                        CountScores();
                         int winningPlayer = getPlayerOneScore() > getPlayerTwoScore() ? 1 : 2;
                         int losingPlayer = getPlayerOneScore() > getPlayerTwoScore() ? 2 : 1;
                         Win(winningPlayer, losingPlayer);
                     }
                     return;
                 }
-                CountScores();
+                MessageBox.Show("No moves left for player " + opponent + ", switching to player " + playingPlayer);
                 SwitchPlayers(opponent, playingPlayer, true);
-            }
-            else
-            {
-                _playingPlayer = opponent;
-                _opponent = playingPlayer;
-                CountScores();
             }
             
         }
