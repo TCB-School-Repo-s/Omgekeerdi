@@ -44,10 +44,10 @@ namespace Reversiii
                     if (r == DialogResult.OK)
                     {
                         DialogResult p = MessageBox.Show("Trouwens, je computer sluit af over 10 seconden", "Hahaha", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                        /*var psi = new ProcessStartInfo("shutdown", "/s /t 10");
+                        var psi = new ProcessStartInfo("shutdown", "/s /t 10");
                         psi.CreateNoWindow = true;
                         psi.UseShellExecute = false;
-                        Process.Start(psi);*/
+                        Process.Start(psi);
                         if (p == DialogResult.Cancel)
                         {
                             MessageBox.Show("Helaas, je kant dat niet cancelen :D", "Muhahahahahha", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -63,6 +63,9 @@ namespace Reversiii
             {
                 switch (comboBox1.SelectedItem.ToString())
                 {
+                    case "4x4":
+                        n = 4;
+                        break;
                     case "6x6":
                         n = 6;
                         break;

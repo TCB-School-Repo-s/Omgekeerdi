@@ -199,44 +199,67 @@ namespace Reversiii
             }
         }
 
-        public void SwitchPlayers(int playingPlayer, int opponent)
+        public void SwitchPlayers(int playingPlayer, int opponent, bool secondTry = false)
         {
 
-            bool anyMovesLeft = false; // Default movesleft to false
+            // Check if there are any moves left, if not switch to other player, if that player has no moves either, then it's game over
+            bool moveLeft = false;
+            //ShowHelp = false;
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
-                    if (CheckMove(i, j)) // If it finds any legal move, it will change it to true, so the winning function isn't called
+                    if (CheckMove(i, j))
                     {
-                        anyMovesLeft = true;
+                        moveLeft = true;
+                        break;
                     }
                 }
             }
-
-            if (anyMovesLeft)
+            if (!moveLeft)
             {
-                _playingPlayer = opponent;
-                _opponent = playingPlayer;
-                this.ShowHelp = false;
                 CountScores();
+                if (secondTry)
+                {
+                    CountScores();
+                    if(getPlayerOneScore() == getPlayerTwoScore())
+                    {
+                        CountScores();
+                        Win(playingPlayer, opponent, true);
+                    }
+                    else
+                    {
+                        CountScores();
+                        int winningPlayer = getPlayerOneScore() > getPlayerTwoScore() ? 1 : 2;
+                        int losingPlayer = getPlayerOneScore() > getPlayerTwoScore() ? 2 : 1;
+                        Win(winningPlayer, losingPlayer);
+                    }
+                    return;
+                }
+                CountScores();
+                SwitchPlayers(opponent, playingPlayer, true);
             }
             else
             {
+                _playingPlayer = opponent;
+                _opponent = playingPlayer;
                 CountScores();
-                int winningPlayer = getPlayerOneScore() > getPlayerTwoScore() ? 1 : 2;
-                int losingPlayer = getPlayerOneScore() > getPlayerTwoScore() ? 2 : 1;
-                Win(winningPlayer, losingPlayer);
             }
-
             
         }
 
-        public void Win(int winningPlayer, int losingPlayer)
+        public void Win(int winningPlayer, int losingPlayer, bool remise = false)
         {
-            if (winningPlayer == 1) 
-            MessageBox.Show($"Speler {winningPlayer} {PlayerOneName} heeft gewonnen!");
-            else MessageBox.Show($"Speler {winningPlayer} {PlayerTwoName} heeft gewonnen!");
+            if (!remise)
+            {
+                if (winningPlayer == 1)
+                    MessageBox.Show($"Speler {winningPlayer} {PlayerOneName} heeft gewonnen!");
+                else MessageBox.Show($"Speler {winningPlayer} {PlayerTwoName} heeft gewonnen!");
+            }
+            else
+            {
+                MessageBox.Show($"Remise!");
+            }
         }
 
 
