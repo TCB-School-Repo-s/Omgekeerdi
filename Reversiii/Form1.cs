@@ -142,7 +142,7 @@ namespace Reversiii
             nameForm.TopMost = true;
             nameForm.Show();
             nameForm.Focus();
-            comboBox1.SelectedIndex = 0;
+            comboBox1.SelectedIndex = 2;
             Random rnd = new Random();
 
             outputDevice = new WaveOutEvent();

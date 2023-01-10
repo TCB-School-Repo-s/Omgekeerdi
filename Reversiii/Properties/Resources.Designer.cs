@@ -117,9 +117,9 @@ namespace Reversiii.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap bg {
+        internal static System.Drawing.Bitmap istockphoto_1020149446_612x612 {
             get {
-                object obj = ResourceManager.GetObject("bg", resourceCulture);
+                object obj = ResourceManager.GetObject("istockphoto-1020149446-612x612", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -127,9 +127,9 @@ namespace Reversiii.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap istockphoto_1020149446_612x612 {
+        internal static System.Drawing.Bitmap omgekeerdi_removebg_preview {
             get {
-                object obj = ResourceManager.GetObject("istockphoto-1020149446-612x612", resourceCulture);
+                object obj = ResourceManager.GetObject("omgekeerdi-removebg-preview", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

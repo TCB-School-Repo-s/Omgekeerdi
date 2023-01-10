@@ -139,6 +139,7 @@
             // comboBox1
             // 
             this.comboBox1.Items.AddRange(new object[] {
+            "4x4",
             "6x6",
             "8x8",
             "10x10",
