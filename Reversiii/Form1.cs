@@ -14,12 +14,12 @@ namespace Reversiii
         Song[] playlist;
         Song[] songs =
         {
-            new Song(Path.Combine(Application.StartupPath, "Resources\\1.wav"), "Style", "Taylor Swift"),
-            new Song(Path.Combine(Application.StartupPath, "Resources\\2.wav"), "Anti-hero", "Taylor Swift"),
-            new Song(Path.Combine(Application.StartupPath, "Resources\\3.wav"), "Just the Way You Are", "Bruno Mars"),
-            new Song(Path.Combine(Application.StartupPath, "Resources\\4.wav"), "Rain On Me", "Lady Gaga ft. Ariana Grande"),
-            new Song(Path.Combine(Application.StartupPath, "Resources\\5.wav"), "I Want To Break Free", "Queen"),
-            new Song(Path.Combine(Application.StartupPath, "Resources\\6.wav"), "Bohemian Rhapsody", "Queen"),
+            new Song(Path.Combine(Application.StartupPath, "music\\1.wav"), "Style", "Taylor Swift"),
+            new Song(Path.Combine(Application.StartupPath, "music\\2.wav"), "Anti-hero", "Taylor Swift"),
+            new Song(Path.Combine(Application.StartupPath, "music\\3.wav"), "Just the Way You Are", "Bruno Mars"),
+            new Song(Path.Combine(Application.StartupPath, "music\\4.wav"), "Rain On Me", "Lady Gaga ft. Ariana Grande"),
+            new Song(Path.Combine(Application.StartupPath, "music\\5.wav"), "I Want To Break Free", "Queen"),
+            new Song(Path.Combine(Application.StartupPath, "music\\6.wav"), "Bohemian Rhapsody", "Queen"),
         };
         int songIndex = 0;
 

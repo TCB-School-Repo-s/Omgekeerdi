@@ -207,7 +207,7 @@ namespace Reversiii
             CountScores();
             // Check if there are any moves left, if not switch to other player, if that player has no moves either, then it's game over
             bool moveLeft = false;
-            //ShowHelp = false;
+            ShowHelp = false;
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < n; j++)
@@ -262,8 +262,8 @@ namespace Reversiii
             if (!remise)
             {
                 if (winningPlayer == 1)
-                    MessageBox.Show($"Speler {winningPlayer} {PlayerOneName} heeft gewonnen!");
-                else MessageBox.Show($"Speler {winningPlayer} {PlayerTwoName} heeft gewonnen!");
+                    MessageBox.Show($"Speler {winningPlayer} - {PlayerOneName} heeft gewonnen!");
+                else MessageBox.Show($"Speler {winningPlayer} - {PlayerTwoName} heeft gewonnen!");
             }
             else
             {
