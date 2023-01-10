@@ -123,5 +123,15 @@ namespace Reversiii.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap omgekeerdi_removebg_preview {
+            get {
+                object obj = ResourceManager.GetObject("omgekeerdi-removebg-preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

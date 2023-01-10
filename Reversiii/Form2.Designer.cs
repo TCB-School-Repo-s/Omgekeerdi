@@ -34,11 +34,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.invoer2 = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // invoer1
             // 
-            this.invoer1.Location = new System.Drawing.Point(50, 167);
+            this.invoer1.Location = new System.Drawing.Point(49, 215);
             this.invoer1.Name = "invoer1";
             this.invoer1.Size = new System.Drawing.Size(270, 27);
             this.invoer1.TabIndex = 0;
@@ -46,7 +48,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(79, 106);
+            this.label1.Location = new System.Drawing.Point(78, 154);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(199, 20);
             this.label1.TabIndex = 1;
@@ -54,7 +56,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(301, 284);
+            this.button1.Location = new System.Drawing.Point(303, 295);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(146, 45);
             this.button1.TabIndex = 2;
@@ -65,7 +67,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(467, 106);
+            this.label2.Location = new System.Drawing.Point(466, 154);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(199, 20);
             this.label2.TabIndex = 4;
@@ -73,16 +75,27 @@
             // 
             // invoer2
             // 
-            this.invoer2.Location = new System.Drawing.Point(437, 167);
+            this.invoer2.Location = new System.Drawing.Point(436, 215);
             this.invoer2.Name = "invoer2";
             this.invoer2.Size = new System.Drawing.Size(270, 27);
             this.invoer2.TabIndex = 3;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Reversiii.Properties.Resources.omgekeerdi_removebg_preview;
+            this.pictureBox1.Location = new System.Drawing.Point(208, 33);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(355, 91);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 394);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.invoer2);
             this.Controls.Add(this.button1);
@@ -92,6 +105,7 @@
             this.Name = "Form2";
             this.Text = "Welcome to omgekeerdi!";
             this.Load += new System.EventHandler(this.Form2_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -104,5 +118,6 @@
         private Button button1;
         private Label label2;
         private TextBox invoer2;
+        private PictureBox pictureBox1;
     }
 }
