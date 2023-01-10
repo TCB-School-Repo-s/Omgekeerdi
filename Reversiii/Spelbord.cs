@@ -133,20 +133,20 @@ namespace Reversiii
             // Function that finds enclosed stones, and plays the stones if play is true
             if (i < 0 || j < 0 || i > n - 1 || j > n - 1)
             {
-                return false;
+                return false; // If it is outside of the board, the move is false;
             }
             if (boardArray[i, j] == 0)
             {
-                return false;
+                return false; // if place is empty, cannot enclose, so too bad not enclosed.
             }
             if (boardArray[i, j] == _playingPlayer)
             {
-                if (firstStone) return false;
-                return true;
+                if (firstStone) return false; // If the first stone it finds is the player, then the move is not valid
+                return true; // else it succesfully encloses stone, so true
             }
             if (FindEnclosure(i + di, j + dj, di, dj, currentlyPlaying, false))
             {
-                if (currentlyPlaying)
+                if (currentlyPlaying) // If we are currently playing, then it will change the stones
                 {
                     PlayStones(i, j, di, dj);
                 }
@@ -169,7 +169,7 @@ namespace Reversiii
                 {
                     if(!(i == 0 && j == 0))
                     {
-                        if (FindEnclosure(x + i, y+j, i, j, false, true))
+                        if (FindEnclosure(x + i, y+j, i, j, false, true)) // For every x and y in the same direction, it will check if there is an enclosure
                         {
                             return true;
                         }
@@ -184,7 +184,7 @@ namespace Reversiii
             if (boardArray[x,y] != _playingPlayer)
             {
                 boardArray[x, y] = _playingPlayer;
-                PlayStones(x + dx, y + dy, dx, dy);
+                PlayStones(x + dx, y + dy, dx, dy); // Changes stones
             }
         }
 
@@ -194,7 +194,7 @@ namespace Reversiii
             {
                 for(int j = -1; j <= 1; j++)
                 {
-                    if (!(i == 0 && j == 0)) FindEnclosure(x + i, y + j, i, j, true);
+                    if (!(i == 0 && j == 0)) FindEnclosure(x + i, y + j, i, j, true); // Finds enclosures and changes the stones
                 }
             }
         }
@@ -202,12 +202,12 @@ namespace Reversiii
         public void SwitchPlayers(int playingPlayer, int opponent)
         {
 
-            bool anyMovesLeft = false;
+            bool anyMovesLeft = false; // Default movesleft to false
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
-                    if (CheckMove(i, j))
+                    if (CheckMove(i, j)) // If it finds any legal move, it will change it to true, so the winning function isn't called
                     {
                         anyMovesLeft = true;
                     }
@@ -251,8 +251,8 @@ namespace Reversiii
 
             if (CheckMove(x, y))
             {
-                boardArray[x, y] = _playingPlayer;
-                Play(x, y);
+                boardArray[x, y] = _playingPlayer; // Change place to playingplayer
+                Play(x, y); // Play the moves
                 SwitchPlayers(_playingPlayer, _opponent); this.Invalidate();
             }
             else
@@ -267,7 +267,7 @@ namespace Reversiii
             Spelbord? board = (Spelbord?)sender;
 
             // Draw 6 x 6 grid using panel1 size
-            float x = board.Width / (float)n;
+            float x = board.Width / (float)n; // calculate width and height of boxes;
             float y = board.Height / (float)n;
             Pen pen = new Pen(Color.Black, 2.5f);
             for (int i = 0; i < n; i++)
@@ -282,7 +282,7 @@ namespace Reversiii
             {
                 for (int j = 0; j < n; j++)
                 {
-                    if (this.ShowHelp)
+                    if (this.ShowHelp) // If showcode is true, then it will check if a move is legal for every place in array, and if it is, it wil draw an ellipse
                     {
                         if (CheckMove(i, j))
                         {

