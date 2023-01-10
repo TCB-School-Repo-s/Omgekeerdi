@@ -11,7 +11,12 @@
     <Copyright>© 2022 Bas van 't Hazeveld &amp; Dana Stelling</Copyright>
     <Product>Omgekeerdi</Product>
     <Description>Bedankt voor het spelen van Omgekeerdi, oftewel Reversi! Hèt strategiespel voor twee personen wat bestaat sinds 1883! </Description>
+    <ApplicationIcon>My project-1 (1).ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="My project-1 (1).ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="NAudio" Version="2.1.0" />

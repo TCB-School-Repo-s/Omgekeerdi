@@ -286,7 +286,7 @@ namespace Reversiii
                     {
                         if (CheckMove(i, j))
                         {
-                            e.Graphics.DrawEllipse(new Pen(Color.FromArgb(255, 205,0)), i * x + 5, j * y + 5, x - 10, y - 10);
+                            e.Graphics.DrawEllipse(new Pen(Color.FromArgb(192, 10, 53), 5), i * x + 5, j * y + 5, x - 10, y - 10);
                         }
                     }
                     if (boardArray[i, j] == 1)

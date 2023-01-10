@@ -229,7 +229,7 @@
             // 
             // spelbord1
             // 
-            this.spelbord1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(10)))), ((int)(((byte)(53)))));
+            this.spelbord1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(205)))), ((int)(((byte)(0)))));
             this.spelbord1.BoardSize = 8;
             this.spelbord1.Location = new System.Drawing.Point(14, 36);
             this.spelbord1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
