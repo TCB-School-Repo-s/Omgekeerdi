@@ -193,7 +193,7 @@ namespace Reversiii
 
         private void button2_Click(object sender, EventArgs e)
         {
-            spelbord1.ShowHelp = true;
+            spelbord1.ShowHelp = spelbord1.ShowHelp ? false : true;
             spelbord1.Invalidate();
         }
 
