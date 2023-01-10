@@ -24,6 +24,9 @@ namespace Reversiii
         int _playingPlayer = 1;
         int _opponent = 2;
 
+        public string PlayerOneName { get; set; }
+        public string PlayerTwoName { get; set; }
+
 
         public Spelbord()
         {
@@ -232,8 +235,8 @@ namespace Reversiii
         public void Win(int winningPlayer, int losingPlayer)
         {
             if (winningPlayer == 1) 
-            MessageBox.Show($"Speler {winningPlayer} {Form2.name1} heeft gewonnen!");
-            else MessageBox.Show($"Speler {winningPlayer} {Form2.name2} heeft gewonnen!");
+            MessageBox.Show($"Speler {winningPlayer} {PlayerOneName} heeft gewonnen!");
+            else MessageBox.Show($"Speler {winningPlayer} {PlayerTwoName} heeft gewonnen!");
         }
 
 

@@ -28,6 +28,9 @@ namespace Reversiii
             InitializeComponent();
         }
 
+        public string PlayerOneName { get; set; }
+        public string PlayerTwoName { get; set; }
+
         private void button1_Click(object sender, EventArgs e)
         {
             int n = 6;
@@ -71,7 +74,6 @@ namespace Reversiii
                 spelbord1.BoardSize = n;
                 spelbord1.SwitchPlayers(2, 1);
                 spelbord1.resetGame();
-                this.Hide();
                 nameForm.Show();
             }
         }
@@ -114,8 +116,9 @@ namespace Reversiii
         private void Form1_Load(object sender, EventArgs e)
         {
             nameForm.SetForm(this);
-            this.Hide();
+            nameForm.TopMost = true;
             nameForm.Show();
+            nameForm.Focus();
             comboBox1.SelectedIndex = 0;
             Random rnd = new Random();
 

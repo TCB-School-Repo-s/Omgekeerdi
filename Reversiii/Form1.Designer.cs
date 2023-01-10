@@ -192,7 +192,7 @@
             this.groupBox2.Controls.Add(this.playerOneScore);
             this.groupBox2.Location = new System.Drawing.Point(674, 329);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(367, 455);
+            this.groupBox2.Size = new System.Drawing.Size(367, 347);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Game Statistics";
@@ -201,7 +201,7 @@
             // 
             this.playerTwoLabel.AutoSize = true;
             this.playerTwoLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.playerTwoLabel.Location = new System.Drawing.Point(99, 312);
+            this.playerTwoLabel.Location = new System.Drawing.Point(99, 187);
             this.playerTwoLabel.Name = "playerTwoLabel";
             this.playerTwoLabel.Size = new System.Drawing.Size(78, 32);
             this.playerTwoLabel.TabIndex = 3;
@@ -211,7 +211,7 @@
             // 
             this.playerOneLabel.AutoSize = true;
             this.playerOneLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.playerOneLabel.Location = new System.Drawing.Point(99, 103);
+            this.playerOneLabel.Location = new System.Drawing.Point(99, 61);
             this.playerOneLabel.Name = "playerOneLabel";
             this.playerOneLabel.Size = new System.Drawing.Size(78, 32);
             this.playerOneLabel.TabIndex = 2;
@@ -219,7 +219,7 @@
             // 
             // playerTwoScore
             // 
-            this.playerTwoScore.Location = new System.Drawing.Point(7, 280);
+            this.playerTwoScore.Location = new System.Drawing.Point(7, 155);
             this.playerTwoScore.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.playerTwoScore.Name = "playerTwoScore";
             this.playerTwoScore.Size = new System.Drawing.Size(86, 103);
@@ -229,7 +229,7 @@
             // 
             // playerOneScore
             // 
-            this.playerOneScore.Location = new System.Drawing.Point(7, 69);
+            this.playerOneScore.Location = new System.Drawing.Point(7, 27);
             this.playerOneScore.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.playerOneScore.Name = "playerOneScore";
             this.playerOneScore.Size = new System.Drawing.Size(86, 103);
@@ -248,7 +248,7 @@
             this.spelbord1.PlayerOneColor = System.Drawing.Color.Black;
             this.spelbord1.PlayerTwoColor = System.Drawing.Color.White;
             this.spelbord1.ShowHelp = false;
-            this.spelbord1.Size = new System.Drawing.Size(654, 760);
+            this.spelbord1.Size = new System.Drawing.Size(640, 640);
             this.spelbord1.TabIndex = 3;
             this.spelbord1.Paint += new System.Windows.Forms.PaintEventHandler(this.spelbord1_Paint);
             // 
@@ -348,7 +348,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1053, 813);
+            this.ClientSize = new System.Drawing.Size(1053, 684);
             this.Controls.Add(this.spelbord1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

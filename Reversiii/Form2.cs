@@ -24,14 +24,21 @@ namespace Reversiii
         private void button1_Click(object sender, EventArgs e)
         {   name1 = invoer1.Text;
             name2= invoer2.Text;
-            if (string.IsNullOrWhiteSpace(invoer1.Text) ||string.IsNullOrWhiteSpace(invoer2.Text))
+            if (string.IsNullOrWhiteSpace(invoer1.Text) || string.IsNullOrWhiteSpace(invoer2.Text))
             {
                 MessageBox.Show("Vul beide velden in!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
                 this.Hide();
-                mainForm.Show();
+                mainForm.PlayerOneName = name1;
+                mainForm.PlayerTwoName = name2;
+
+                Spelbord bord = (Spelbord)mainForm.Controls["spelbord1"];
+                bord.Invalidate();
+                bord.PlayerOneName = name1;
+                bord.PlayerTwoName = name2;
+                
             }
         }
 
@@ -47,7 +54,7 @@ namespace Reversiii
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            mainForm.Hide();
+            this.Focus();
         }
     }
 }
