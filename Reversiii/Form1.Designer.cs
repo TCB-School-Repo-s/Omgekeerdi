@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.playingSongLabel = new System.Windows.Forms.Label();
@@ -46,14 +45,6 @@
             this.playerTwoScore = new System.Windows.Forms.PictureBox();
             this.playerOneScore = new System.Windows.Forms.PictureBox();
             this.spelbord1 = new Reversiii.Spelbord();
-            this.spelBordMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.x6ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.x8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.x10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.x10ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.x14ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.x16ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gameRulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,7 +54,6 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.playerTwoScore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.playerOneScore)).BeginInit();
-            this.spelBordMenu.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -239,75 +229,19 @@
             // 
             // spelbord1
             // 
-            this.spelbord1.BackColor = System.Drawing.Color.SteelBlue;
+            this.spelbord1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(10)))), ((int)(((byte)(53)))));
             this.spelbord1.BoardSize = 8;
-            this.spelbord1.ContextMenuStrip = this.spelBordMenu;
             this.spelbord1.Location = new System.Drawing.Point(14, 36);
             this.spelbord1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.spelbord1.Name = "spelbord1";
             this.spelbord1.PlayerOneColor = System.Drawing.Color.Black;
+            this.spelbord1.PlayerOneName = null;
             this.spelbord1.PlayerTwoColor = System.Drawing.Color.White;
+            this.spelbord1.PlayerTwoName = null;
             this.spelbord1.ShowHelp = false;
             this.spelbord1.Size = new System.Drawing.Size(640, 640);
             this.spelbord1.TabIndex = 3;
             this.spelbord1.Paint += new System.Windows.Forms.PaintEventHandler(this.spelbord1_Paint);
-            // 
-            // spelBordMenu
-            // 
-            this.spelBordMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.spelBordMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newGameToolStripMenuItem});
-            this.spelBordMenu.Name = "spelBordMenu";
-            this.spelBordMenu.Size = new System.Drawing.Size(152, 28);
-            // 
-            // newGameToolStripMenuItem
-            // 
-            this.newGameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.x6ToolStripMenuItem,
-            this.x8ToolStripMenuItem,
-            this.x10ToolStripMenuItem,
-            this.x10ToolStripMenuItem1,
-            this.x14ToolStripMenuItem,
-            this.x16ToolStripMenuItem});
-            this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(151, 24);
-            this.newGameToolStripMenuItem.Text = "New Game";
-            // 
-            // x6ToolStripMenuItem
-            // 
-            this.x6ToolStripMenuItem.Name = "x6ToolStripMenuItem";
-            this.x6ToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
-            this.x6ToolStripMenuItem.Text = "6x6";
-            // 
-            // x8ToolStripMenuItem
-            // 
-            this.x8ToolStripMenuItem.Name = "x8ToolStripMenuItem";
-            this.x8ToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
-            this.x8ToolStripMenuItem.Text = "8x8";
-            // 
-            // x10ToolStripMenuItem
-            // 
-            this.x10ToolStripMenuItem.Name = "x10ToolStripMenuItem";
-            this.x10ToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
-            this.x10ToolStripMenuItem.Text = "10x10";
-            // 
-            // x10ToolStripMenuItem1
-            // 
-            this.x10ToolStripMenuItem1.Name = "x10ToolStripMenuItem1";
-            this.x10ToolStripMenuItem1.Size = new System.Drawing.Size(131, 26);
-            this.x10ToolStripMenuItem1.Text = "12x10";
-            // 
-            // x14ToolStripMenuItem
-            // 
-            this.x14ToolStripMenuItem.Name = "x14ToolStripMenuItem";
-            this.x14ToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
-            this.x14ToolStripMenuItem.Text = "14x14";
-            // 
-            // x16ToolStripMenuItem
-            // 
-            this.x16ToolStripMenuItem.Name = "x16ToolStripMenuItem";
-            this.x16ToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
-            this.x16ToolStripMenuItem.Text = "16x16";
             // 
             // menuStrip1
             // 
@@ -367,7 +301,6 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.playerTwoScore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.playerOneScore)).EndInit();
-            this.spelBordMenu.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -392,14 +325,6 @@
         private PictureBox playerOneScore;
         private Label playerTwoLabel;
         private Label playerOneLabel;
-        private ContextMenuStrip spelBordMenu;
-        private ToolStripMenuItem newGameToolStripMenuItem;
-        private ToolStripMenuItem x6ToolStripMenuItem;
-        private ToolStripMenuItem x8ToolStripMenuItem;
-        private ToolStripMenuItem x10ToolStripMenuItem;
-        private ToolStripMenuItem x10ToolStripMenuItem1;
-        private ToolStripMenuItem x14ToolStripMenuItem;
-        private ToolStripMenuItem x16ToolStripMenuItem;
         private Label label2;
         private TrackBar trackBar1;
         private Button button4;

@@ -193,10 +193,10 @@ namespace Reversiii
 
         private void gameRulesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process process = new Process(); 
-            process.StartInfo.UseShellExecute = true; 
-            process.StartInfo.FileName = "chrome"; 
-            process.StartInfo.Arguments = @"https://en.wikipedia.org/wiki/Reversi"; 
+
+            Process process = new Process();
+            process.StartInfo.UseShellExecute = true;
+            process.StartInfo.FileName = "https://en.wikipedia.org/wiki/Reversi";
             process.Start();
         }
     }

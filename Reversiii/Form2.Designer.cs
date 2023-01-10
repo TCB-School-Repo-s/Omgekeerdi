@@ -36,6 +36,7 @@
             this.invoer2 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.ControlBox = false;
             this.SuspendLayout();
             // 
             // invoer1
@@ -82,7 +83,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Reversiii.Properties.Resources.omgekeerdi_removebg_preview;
+            this.pictureBox1.Image = global::Reversiii.Properties.Resources.bg;
             this.pictureBox1.Location = new System.Drawing.Point(208, 33);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(355, 91);
