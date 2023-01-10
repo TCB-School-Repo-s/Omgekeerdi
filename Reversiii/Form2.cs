@@ -12,6 +12,8 @@ namespace Reversiii
 {
     public partial class Form2 : Form
     {
+
+        private Form1 mainForm;
         public Form2()
         {
             InitializeComponent();
@@ -29,9 +31,23 @@ namespace Reversiii
             else
             {
                 this.Hide();
-                Form form1 = new Form1();
-                form1.Show();
+                mainForm.Show();
             }
+        }
+
+        public void SetForm(Form1 form)
+        {
+            mainForm = form;
+        }
+
+        public Form1 GetForm()
+        {
+            return mainForm;
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            mainForm.Hide();
         }
     }
 }

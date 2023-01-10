@@ -8,7 +8,7 @@ namespace Reversiii
 {
     public partial class Form1 : Form
     {
-
+        Form2 nameForm = new Form2();
         private WaveOutEvent outputDevice;
         private AudioFileReader audioFile;
         Song[] playlist;
@@ -71,6 +71,8 @@ namespace Reversiii
                 spelbord1.BoardSize = n;
                 spelbord1.SwitchPlayers(2, 1);
                 spelbord1.resetGame();
+                this.Hide();
+                nameForm.Show();
             }
         }
 
@@ -111,6 +113,9 @@ namespace Reversiii
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            nameForm.SetForm(this);
+            this.Hide();
+            nameForm.Show();
             comboBox1.SelectedIndex = 0;
             Random rnd = new Random();
 
